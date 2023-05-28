@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Cars.Services.MapperConfig;
 using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
@@ -76,16 +77,19 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(VolumeUpdateViewModel model)
+        public int Update(string id, VolumeUpdateViewModel model)
         {
             try
             {
-                var entity = mapper.Map<Volume>(model);
+                 Volume volume = context.Volumes.FirstOrDefault(x => x.Id == id);
 
-                if (entity != null)
+                if (model != null)
                 {
-                    
-                    context.Set<Volume>().Update(entity);
+
+                    volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == model.VolumeInfoId);
+                    volume.SaleInfo = context.SaleInfos.FirstOrDefault(x => x.Id == model.SaleInfoId);
+                    volume.SearchInfo = context.SearchInfos.FirstOrDefault(x => x.Id == model.SearchInfoId);
+                    context.Set<Volume>().Update(volume);
 
                     return context.SaveChanges();
                 }

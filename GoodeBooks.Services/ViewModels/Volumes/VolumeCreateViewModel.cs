@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ViewModels.Volumes
 {
-    public class VolumeCreateViewModel : BaseViewModel, IVolumeViewModel
+    public class VolumeCreateViewModel : IVolumeViewModel
     {
         public string Kind { get; set; }
         public string Etag { get; set; }

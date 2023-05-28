@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ViewModels.Volumes
 {
-    public class VolumeUpdateViewModel : BaseViewModel
+    public class VolumeUpdateViewModel
     {
         public string VolumeInfoId { get; set; }
         public string SaleInfoId { get; set; }

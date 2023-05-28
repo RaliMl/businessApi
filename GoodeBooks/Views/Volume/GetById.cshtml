@@ -1,0 +1,29 @@
+﻿@using GoodeBooks.Services.ViewModels.Volumes;
+@model VolumeGetViewModel
+
+<form asp-action="GetById" asp-controller="Volume" method="get">
+    <div>
+        <label asp-for="Kind"></label>
+        <input asp-for="Kind" readonly/>
+    </div>
+
+    <div>
+        <label asp-for="Etag"></label>
+        <input asp-for="Etag" readonly />
+    </div>
+
+    <div>
+        <label asp-for="VolumeInfoId"></label>
+        <input asp-for="VolumeInfoId" readonly />
+    </div>
+
+    <div>
+        <label asp-for="SaleInfoId"></label>
+        <input asp-for="SaleInfoId" readonly />
+    </div>
+
+    <div>
+        <label asp-for="SearchInfoId"></label>
+        <input asp-for="SearchInfoId" readonly />
+    </div>
+</form>

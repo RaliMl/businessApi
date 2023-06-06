@@ -1,13 +1,12 @@
-﻿using GoodeBooks.Models.BaseModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoodeBooks.Models.Entities
+namespace GoodeBooks.Services.ViewModels.SaleInfos
 {
-    public class SaleInfo : BaseModel
+    public class SaleInfoCreateViewModel
     {
         public string Country { get; set; }
         public string SaleAbility { get; set; }

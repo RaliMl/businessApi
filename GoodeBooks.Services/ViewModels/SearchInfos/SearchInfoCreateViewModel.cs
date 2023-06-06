@@ -1,13 +1,12 @@
-﻿using GoodeBooks.Models.BaseModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoodeBooks.Models.Entities
+namespace GoodeBooks.Services.ViewModels.SearchInfos
 {
-    public class SearchInfo : BaseModel
+    public class SearchInfoCreateViewModel
     {
         public string TextSnippet { get; set; }
     }

@@ -23,8 +23,8 @@ namespace GoodeBooks.Database
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SaleInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.SaleInfo).HasForeignKey<SaleInfo>(f => f.Id));
-            modelBuilder.Entity<SearchInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.SearchInfo).HasForeignKey<SearchInfo>(f => f.Id));
+            //modelBuilder.Entity<SaleInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.SaleInfo).HasForeignKey<SaleInfo>(f => f.Id));
+            //modelBuilder.Entity<SearchInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.SearchInfo).HasForeignKey<SearchInfo>(f => f.Id));
             //modelBuilder.Entity<VolumeInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.VolumeInfo).HasForeignKey<VolumeInfo>(f => f.Id));
             //modelBuilder.Entity<VolumeInfo>(s => s.HasMany(m => m.Authors).WithMany(m => m.Volumes));
         }

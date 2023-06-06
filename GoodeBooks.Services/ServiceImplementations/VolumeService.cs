@@ -34,9 +34,9 @@ namespace GoodeBooks.Services.ServiceImplementations
             {
                 var volume = mapper.Map<Volume>(model);
 
-                volume = context.Volumes.Include("VolumeInfo").First();
-                volume = context.Volumes.Include("SearchInfo").First();
-                volume = context.Volumes.Include("SaleInfo").First();
+                volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(s => s.Id == model.VolumeInfoId);
+                volume.SaleInfo = context.SaleInfos.FirstOrDefault(s => s.Id == model.SaleInfoId);
+                volume.SearchInfo = context.SearchInfos.FirstOrDefault(s => s.Id == model.SearchInfoId);
 
                 context.Volumes.Add(volume); 
 
@@ -66,11 +66,15 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public VolumeGetViewModel GetById(string id)
+        public VolumeViewModel GetById(string id)
         {
             try
-            { 
-                var res = mapper.Map<VolumeGetViewModel>(context.Volumes.FirstOrDefault(x => x.Id == id));
+            {
+                var volume = context.Volumes.FirstOrDefault(x => x.Id == id);
+                var res = mapper.Map<VolumeViewModel>(volume);
+                res.VolumeName = volume.VolumeInfo.Title;
+                res.Country = volume.SaleInfo.Country;
+                res.TextSnippet = volume.SearchInfo.TextSnippet;
 
                 return res;
             }

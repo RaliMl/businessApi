@@ -17,6 +17,6 @@ namespace GoodeBooks.Models.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        public ICollection<Bookshelf> Bookshelves { get; set; }
+        public virtual ICollection<Bookshelf> Bookshelves { get; set; }
     }
 }

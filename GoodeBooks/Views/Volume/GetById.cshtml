@@ -1,5 +1,5 @@
 ﻿@using GoodeBooks.Services.ViewModels.Volumes;
-@model VolumeGetViewModel
+@model VolumeViewModel
 
 <form asp-action="GetById" asp-controller="Volume" method="get">
     <div>
@@ -13,17 +13,17 @@
     </div>
 
     <div>
-        <label asp-for="VolumeInfoId"></label>
-        <input asp-for="VolumeInfoId" readonly />
+        <label asp-for="VolumeName"></label>
+        <input asp-for="VolumeName" readonly />
     </div>
 
     <div>
-        <label asp-for="SaleInfoId"></label>
-        <input asp-for="SaleInfoId" readonly />
+        <label asp-for="Country"></label>
+        <input asp-for="Country" readonly />
     </div>
 
-    <div>
-        <label asp-for="SearchInfoId"></label>
-        <input asp-for="SearchInfoId" readonly />
+    <div class="form-group">
+        <label asp-for="TextSnippet">Text Snippet:</label>
+        <textarea class="form-control" asp-for="TextSnippet"></textarea>
     </div>
 </form>

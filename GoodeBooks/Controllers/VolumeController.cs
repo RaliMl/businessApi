@@ -16,7 +16,7 @@ namespace GoodeBooks.Controllers
 
         public IActionResult CreateVolume()
         {
-            return View("CreateVolume");
+            return View("CreateNewVolume");
         }
         public IActionResult CreateNewVolume(VolumeCreateViewModel model) 
         { 

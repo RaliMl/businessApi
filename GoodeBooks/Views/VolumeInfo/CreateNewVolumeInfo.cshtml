@@ -1,0 +1,43 @@
+﻿@using GoodeBooks.Services.ViewModels.VolumeInfos;
+@model VolumeInfoCreateViewModel
+
+<form asp-action="CreateNewVolumeInfo" asp-controller="VolumeInfo" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Subtitle"></label>
+        <input asp-for="Subtitle" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AuthorIds"></label>
+        <input asp-for="AuthorIds" class="form-control" />
+        <small class="text-muted">Enter author IDs separated by commas.</small>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PublishedDate"></label>
+        <input asp-for="PublishedDate" class="form-control" type="date" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PageCount"></label>
+        <input asp-for="PageCount" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Language"></label>
+        <input asp-for="Language" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+

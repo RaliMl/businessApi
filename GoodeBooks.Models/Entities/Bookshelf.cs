@@ -14,6 +14,6 @@ namespace GoodeBooks.Models.Entities
         public DateTime? Updated { get; set; }
         public DateTime Created { get; set; }
         public int VolumeCount { get; set; }
-        public ICollection<Volume> Volumes { get; set; }
+        public virtual ICollection<Volume> Volumes { get; set; }
     }
 }

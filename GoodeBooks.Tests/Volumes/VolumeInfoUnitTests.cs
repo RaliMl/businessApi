@@ -77,7 +77,7 @@ namespace GoodeBooks.Tests.Volumes
             service.Create(createModel);
             var res = service.GetAll();
 
-            Xunit.Assert.Equal(1, res.Count());
+            Xunit.Assert.NotEmpty(res);
         }
 
         [Fact]

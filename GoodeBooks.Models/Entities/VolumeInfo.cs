@@ -11,7 +11,7 @@ namespace GoodeBooks.Models.Entities
     {
         public string Title { get; set; }
         public string Subtitle { get; set; }
-        public ICollection<Author>? Authors { get; set; }
+        public virtual ICollection<Author>? Authors { get; set; }
         public DateTime PublishedDate { get; set; }
         public string Description { get; set; }
         public int PageCount { get; set; }

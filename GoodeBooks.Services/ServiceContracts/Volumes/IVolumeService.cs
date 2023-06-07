@@ -11,8 +11,8 @@ namespace GoodeBooks.Services.ServiceContracts.Volumes
     {
         public int Create(VolumeCreateViewModel model);
         public VolumeViewModel GetById(string id);
-        public int Update(string id, VolumeUpdateViewModel model);
-        public ICollection<VolumeGetViewModel> GetAll();
+        public int Update(VolumeUpdateViewModel model);
+        public ICollection<VolumeViewModel> GetAll();
         public int Delete(string id);
     }
 }

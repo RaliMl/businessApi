@@ -4,6 +4,7 @@ using GoodeBooks.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoodeBooks.Database.Migrations
 {
     [DbContext(typeof(BookstoreDbContext))]
-    partial class BookstoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230606151500_addCascadeDeleteSearchinfo")]
+    partial class addCascadeDeleteSearchinfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,12 +33,12 @@ namespace GoodeBooks.Database.Migrations
                     b.Property<string>("AuthorsId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("VolumeInfosId")
+                    b.Property<string>("VolumesId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("AuthorsId", "VolumeInfosId");
+                    b.HasKey("AuthorsId", "VolumesId");
 
-                    b.HasIndex("VolumeInfosId");
+                    b.HasIndex("VolumesId");
 
                     b.ToTable("AuthorVolumeInfo");
                 });
@@ -51,7 +54,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.Bookshelf", b =>
@@ -267,7 +270,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasOne("GoodeBooks.Models.Entities.VolumeInfo", null)
                         .WithMany()
-                        .HasForeignKey("VolumeInfosId")
+                        .HasForeignKey("VolumesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

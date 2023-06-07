@@ -11,7 +11,7 @@ namespace GoodeBooks.Services.ServiceContracts.SearchInfos
     {
         public int Create(SearchInfoCreateViewModel model);
         public SearchInfoGetViewModel GetById(string id);
-        public int Update(string id, SearchInfoUpdateViewModel model);
+        public int Update(string id, SearchInfoGetViewModel model);
         public ICollection<SearchInfoGetViewModel> GetAll();
         public int Delete(string id);
     }

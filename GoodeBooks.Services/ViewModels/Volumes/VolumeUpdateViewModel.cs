@@ -9,6 +9,7 @@ namespace GoodeBooks.Services.ViewModels.Volumes
 {
     public class VolumeUpdateViewModel
     {
+        public string Id { get; set; }
         public string VolumeInfoId { get; set; }
         public string SaleInfoId { get; set; }
         public string SearchInfoId { get; set; }

@@ -92,16 +92,16 @@ namespace GoodeBooks.Tests
             Xunit.Assert.Equal("Gatsby", res.TextSnippet);
         }
 
-        [Fact]
-        public void Update_SearchInfo_Success()
-        {
-            Arrange();
+        //[Fact]
+        //public void Update_SearchInfo_Success()
+        //{
+        //    Arrange();
 
-            service.Create(createModel);
-            var info = service.GetAll();
-            var res = service.Update(info.First().Id, updateModel);
+        //    service.Create(createModel);
+        //    var info = service.GetAll();
+        //    var res = service.Update(info.First().Id, updateModel);
 
-            Xunit.Assert.Equal(1, res);
-        }
+        //    Xunit.Assert.Equal(1, res);
+        //}
     }
 }

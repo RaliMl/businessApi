@@ -67,7 +67,7 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(string id, SearchInfoUpdateViewModel model)
+        public int Update(string id, SearchInfoGetViewModel model)
         {
             try
             {
@@ -75,7 +75,8 @@ namespace GoodeBooks.Services.ServiceImplementations
 
                 if (searchInfo != null)
                 {
-                    context.Set<SearchInfo>().Update(searchInfo);
+                    searchInfo.TextSnippet = model.TextSnippet;
+                    context.SearchInfos.Update(searchInfo);
 
                     return context.SaveChanges();
                 }

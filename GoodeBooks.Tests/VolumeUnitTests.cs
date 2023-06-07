@@ -50,15 +50,13 @@ namespace GoodeBooks.Tests
             IConfigurationProvider configuration = new MapperConfiguration(x =>
             {
                 x.CreateMap<Volume, VolumeCreateViewModel>().ReverseMap();
-                x.CreateMap<Volume, VolumeGetViewModel>().ReverseMap();
                 x.CreateMap<Volume, VolumeUpdateViewModel>().ReverseMap();
 
                 x.CreateMap<VolumeInfo, VolumeInfoCreateViewModel>().ReverseMap();
-                x.CreateMap<VolumeInfo, VolumeInfoGetViewModel>().ReverseMap();
-                x.CreateMap<VolumeInfo, VolumeInfoUpdateViewModel>().ReverseMap();
+                x.CreateMap<VolumeInfo, VolumeInfoViewModel>().ReverseMap();
 
                 x.CreateMap<SaleInfo, SaleInfoCreateViewModel>().ReverseMap();
-                x.CreateMap<SaleInfo, SaleInfoGetViewModel>().ReverseMap();
+                x.CreateMap<SaleInfo, SaleInfoViewModel>().ReverseMap();
                 x.CreateMap<SaleInfo, SaleInfoUpdateViewModel>().ReverseMap();
 
                 x.CreateMap<SearchInfo, SearchInfoCreateViewModel>().ReverseMap();

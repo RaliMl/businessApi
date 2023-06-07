@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ViewModels.VolumeInfos
 {
-    public class VolumeInfoUpdateViewModel
+    public class VolumeInfoViewModel
     {
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
-        public ICollection<string> AuthorIds { get; set; }
+        public string Authors { get; set; }
         public DateTime PublishedDate { get; set; }
         public string Description { get; set; }
         public int PageCount { get; set; }

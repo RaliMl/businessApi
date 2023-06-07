@@ -60,9 +60,9 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch(Exception e) { return -1; }
         }
 
-        public ICollection<VolumeGetViewModel> GetAll()
+        public ICollection<VolumeViewModel> GetAll()
         {
-            try { return mapper.Map<List<VolumeGetViewModel>>(context.Volumes); }
+            try { return mapper.Map<List<VolumeViewModel>>(context.Volumes); }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
@@ -81,11 +81,11 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(string id, VolumeUpdateViewModel model)
+        public int Update(VolumeUpdateViewModel model)
         {
             try
             {
-                 Volume volume = context.Volumes.FirstOrDefault(x => x.Id == id);
+                 Volume volume = context.Volumes.FirstOrDefault(x => x.Id == model.Id);
 
                 if (model != null)
                 {
@@ -93,7 +93,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                     volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == model.VolumeInfoId);
                     volume.SaleInfo = context.SaleInfos.FirstOrDefault(x => x.Id == model.SaleInfoId);
                     volume.SearchInfo = context.SearchInfos.FirstOrDefault(x => x.Id == model.SearchInfoId);
-                    context.Set<Volume>().Update(volume);
+                    context.Volumes.Update(volume);
 
                     return context.SaveChanges();
                 }

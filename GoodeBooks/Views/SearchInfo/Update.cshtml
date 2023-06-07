@@ -1,0 +1,13 @@
+﻿@using GoodeBooks.Services.ViewModels.SearchInfos;
+@model SearchInfoGetViewModel
+
+<form asp-action="Update" asp-controller="SearchInfo" method="post">
+
+    <input hidden asp-for="Id"></input>
+    <div class="form-group">
+        <label asp-for="TextSnippet">Text Snippet:</label>
+        <textarea class="form-control" asp-for="TextSnippet"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

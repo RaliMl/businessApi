@@ -29,6 +29,8 @@ namespace GoodeBooks.Services.ServiceImplementations
             {
                 var volumeInfo = mapper.Map<VolumeInfo>(model);
 
+                volumeInfo.Authors = context.Authors.Where(x => model.AuthorIds.Contains(x.Id)).ToList();
+
                 context.VolumeInfos.Add(volumeInfo);
 
                 context.SaveChanges();
@@ -51,32 +53,43 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception ex) { return -1; }
         }
 
-        public ICollection<VolumeInfoGetViewModel> GetAll()
+        public ICollection<VolumeInfoViewModel> GetAll()
         {
-            try { return mapper.Map<List<VolumeInfoGetViewModel>>(context.VolumeInfos); }
+            try { return mapper.Map<List<VolumeInfoViewModel>>(context.VolumeInfos); }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public VolumeInfoGetViewModel GetById(string id)
+        public VolumeInfoViewModel GetById(string id)
         {
             try
             {
-                var res = mapper.Map<VolumeInfoGetViewModel>(context.VolumeInfos.FirstOrDefault(x => x.Id == id));
+                var volumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == id);
+
+                var res = mapper.Map<VolumeInfoViewModel>(volumeInfo);
+                res.Authors = string.Join(", ", volumeInfo.Authors.Select(x => x.Name).ToList());
 
                 return res;
             }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(string id, VolumeInfoUpdateViewModel model)
+        public int Update(VolumeInfoViewModel model)
         {
             try
             {
-                var volumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == id);
+                var volumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == model.Id); 
 
                 if (volumeInfo != null)
                 {
-                    context.Set<VolumeInfo>().Update(volumeInfo);
+                    volumeInfo.Subtitle = model.Subtitle;
+                    volumeInfo.Title = model.Title;
+                    volumeInfo.Description = model.Description;
+                    volumeInfo.Authors = context.Authors.Where(x => model.Authors.Contains(x.Name)).ToList();
+                    volumeInfo.PublishedDate = model.PublishedDate;
+                    volumeInfo.PageCount = model.PageCount;
+                    volumeInfo.Language = model.Language;
+
+                    context.VolumeInfos.Update(volumeInfo);
 
                     return context.SaveChanges();
                 }

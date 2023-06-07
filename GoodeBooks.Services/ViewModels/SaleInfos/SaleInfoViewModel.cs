@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ViewModels.SaleInfos
 {
-    public class SaleInfoGetViewModel
+    public class SaleInfoViewModel
     {
         public string Id { get; set; }
         public string Country { get; set; }

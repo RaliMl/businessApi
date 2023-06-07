@@ -2,11 +2,11 @@
 
 @model VolumeUpdateViewModel
 
-<form asp-action="Update" asp-controller="Volume" method="post">
-
+<form asp-action="UpdateVolume" asp-controller="Volume" method="post">
+    <input hidden asp-for="Id" />
     <div>
         <label asp-for="VolumeInfoId"></label>
-        <input asp-for="VolumeInfoId" />
+        <input asp-for="VolumeInfoId" style="width=300px"/>
     </div>
 
     <div>

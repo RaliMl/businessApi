@@ -11,17 +11,15 @@ namespace Cars.Services.MapperConfig
     {
         public MapperConfiguration()
         {
-            CreateMap<Volume, VolumeGetViewModel>().ReverseMap();
             CreateMap<Volume, VolumeViewModel>().ReverseMap();
             CreateMap<Volume, VolumeUpdateViewModel>().ReverseMap();
             CreateMap<Volume, VolumeCreateViewModel>().ReverseMap();
 
             CreateMap<VolumeInfo, VolumeInfoCreateViewModel>().ReverseMap();
-            CreateMap<VolumeInfo, VolumeInfoGetViewModel>().ReverseMap();
-            CreateMap<VolumeInfo, VolumeInfoUpdateViewModel>().ReverseMap();
+            CreateMap<VolumeInfo, VolumeInfoViewModel>().ReverseMap();
 
             CreateMap<SaleInfo, SaleInfoCreateViewModel>().ReverseMap();
-            CreateMap<SaleInfo, SaleInfoGetViewModel>().ReverseMap();
+            CreateMap<SaleInfo, SaleInfoViewModel>().ReverseMap();
             CreateMap<SaleInfo, SaleInfoUpdateViewModel>().ReverseMap();
 
             CreateMap<SearchInfo, SearchInfoCreateViewModel>().ReverseMap();

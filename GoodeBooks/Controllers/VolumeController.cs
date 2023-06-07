@@ -1,4 +1,6 @@
-﻿using GoodeBooks.Services.ServiceContracts.Volumes;
+﻿using GoodeBooks.Database;
+using GoodeBooks.Models.Entities;
+using GoodeBooks.Services.ServiceContracts.Volumes;
 using GoodeBooks.Services.ViewModels.Volumes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Scaffolding;
@@ -8,10 +10,12 @@ namespace GoodeBooks.Controllers
     public class VolumeController : Controller 
     {
         private readonly IVolumeService service;
+        private readonly BookstoreDbContext context;
 
-        public VolumeController(IVolumeService service)
+        public VolumeController(IVolumeService service, BookstoreDbContext context)
         {
             this.service = service;
+            this.context = context;
         }
 
         public IActionResult CreateVolume()
@@ -29,13 +33,16 @@ namespace GoodeBooks.Controllers
             return View(service.GetById(id));
         }
 
-        public IActionResult UpdateVolume()
+        public IActionResult Update(string id)
         {
-            return View("Update");
+            Volume volume = context.Volumes.FirstOrDefault(x => x.Id == id);
+            VolumeUpdateViewModel updateModel = new VolumeUpdateViewModel() { Id = volume.Id, SaleInfoId =  volume.SaleInfo.Id, 
+                SearchInfoId = volume.SearchInfo.Id, VolumeInfoId = volume.VolumeInfo.Id };
+            return View("UpdateVolume", updateModel);
         }
-        public IActionResult Update(string id, VolumeUpdateViewModel model) 
+        public IActionResult UpdateVolume(VolumeUpdateViewModel model) 
         {
-            var res = service.Update(id, model);
+            var res = service.Update(model);
 
             return View(model);
         }

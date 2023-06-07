@@ -8,6 +8,7 @@ namespace GoodeBooks.Services.ViewModels.Volumes
 {
     public class VolumeViewModel
     {
+        public string Id { get; set; }
         public string Kind { get; set; }
         public string Etag { get; set; }
         public string VolumeName { get; set; }

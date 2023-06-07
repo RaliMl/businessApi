@@ -11,9 +11,9 @@ namespace GoodeBooks.Services.ServiceContracts.VolumeInfos
     public interface IVolumeInfoService
     {
         public int Create(VolumeInfoCreateViewModel model);
-        public VolumeInfoGetViewModel GetById(string id);
-        public int Update(string id, VolumeInfoUpdateViewModel model);
-        public ICollection<VolumeInfoGetViewModel> GetAll();
+        public VolumeInfoViewModel GetById(string id);
+        public int Update(VolumeInfoViewModel model);
+        public ICollection<VolumeInfoViewModel> GetAll();
         public int Delete(string id);
     }
 }

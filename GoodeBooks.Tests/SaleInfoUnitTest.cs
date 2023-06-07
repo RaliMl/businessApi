@@ -47,7 +47,7 @@ namespace GoodeBooks.Tests
             IConfigurationProvider configuration = new MapperConfiguration(x =>
             {
                 x.CreateMap<SaleInfo, SaleInfoCreateViewModel>().ReverseMap();
-                x.CreateMap<SaleInfo, SaleInfoGetViewModel>().ReverseMap();
+                x.CreateMap<SaleInfo, SaleInfoViewModel>().ReverseMap();
                 x.CreateMap<SaleInfo, SaleInfoUpdateViewModel>().ReverseMap();
 
             });

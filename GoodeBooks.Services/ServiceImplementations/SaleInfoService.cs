@@ -50,32 +50,36 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception ex) { return -1; }
         }
 
-        public ICollection<SaleInfoGetViewModel> GetAll()
+        public ICollection<SaleInfoViewModel> GetAll()
         {
-            try { return mapper.Map<List<SaleInfoGetViewModel>>(context.SaleInfos); }
+            try { return mapper.Map<List<SaleInfoViewModel>>(context.SaleInfos); }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public SaleInfoGetViewModel GetById(string id)
+        public SaleInfoViewModel GetById(string id)
         {
             try
             {
-                var res = mapper.Map<SaleInfoGetViewModel>(context.SaleInfos.FirstOrDefault(x => x.Id == id));
+                var res = mapper.Map<SaleInfoViewModel>(context.SaleInfos.FirstOrDefault(x => x.Id == id));
 
                 return res;
             }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(string id, SaleInfoUpdateViewModel model)
+        public int Update(SaleInfoViewModel model)
         {
             try
             {
-                var saleInfo = context.SaleInfos.FirstOrDefault(x => x.Id == id);
+                var saleInfo = context.SaleInfos.FirstOrDefault(x => x.Id == model.Id);
 
                 if (saleInfo != null)
                 {
-                    context.Set<SaleInfo>().Update(saleInfo);
+                    saleInfo.SaleAbility = model.SaleAbility;
+                    saleInfo.IsEbook = model.IsEbook;
+                    saleInfo.Country = model.Country;
+
+                    context.SaleInfos.Update(saleInfo);
 
                     return context.SaveChanges();
                 }

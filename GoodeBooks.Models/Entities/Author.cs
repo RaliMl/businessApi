@@ -10,6 +10,6 @@ namespace GoodeBooks.Models.Entities
     public class Author : BaseModel
     {
         public string Name { get; set; }
-        public virtual ICollection<VolumeInfo> Volumes { get; set; }
+        public virtual ICollection<VolumeInfo> VolumeInfos { get; set; }
     }
 }

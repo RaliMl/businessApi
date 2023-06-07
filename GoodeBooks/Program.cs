@@ -29,17 +29,15 @@ builder.Services.AddScoped<ISearchInfoService, SearchInfoService>();
 
 builder.Services.AddAutoMapper(o =>
 {
-    o.CreateMap<Volume, VolumeGetViewModel>().ReverseMap();
     o.CreateMap<Volume, VolumeViewModel>().ReverseMap();
     o.CreateMap<Volume, VolumeUpdateViewModel>().ReverseMap();
     o.CreateMap<Volume, VolumeCreateViewModel>().ReverseMap();
 
     o.CreateMap<VolumeInfo, VolumeInfoCreateViewModel>().ReverseMap();
-    o.CreateMap<VolumeInfo, VolumeInfoGetViewModel>().ReverseMap();
-    o.CreateMap<VolumeInfo, VolumeInfoUpdateViewModel>().ReverseMap();
+    o.CreateMap<VolumeInfo, VolumeInfoViewModel>().ReverseMap();
 
     o.CreateMap<SaleInfo, SaleInfoCreateViewModel>().ReverseMap();
-    o.CreateMap<SaleInfo, SaleInfoGetViewModel>().ReverseMap();
+    o.CreateMap<SaleInfo, SaleInfoViewModel>().ReverseMap();
     o.CreateMap<SaleInfo, SaleInfoUpdateViewModel>().ReverseMap();
 
     o.CreateMap<SearchInfo, SearchInfoCreateViewModel>().ReverseMap();

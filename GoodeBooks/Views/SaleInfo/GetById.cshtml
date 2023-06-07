@@ -1,0 +1,20 @@
+﻿@using GoodeBooks.Services.ViewModels.SaleInfos;
+@model SaleInfoViewModel
+
+<form asp-controller="SaleInfo" asp-action="GetById" method="get">
+    <div class="form-group">
+        <label asp-for="Country">Country:</label>
+        <input asp-for="Country" class="form-control" readonly />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SaleAbility">Sale Ability:</label>
+        <input asp-for="SaleAbility" class="form-control" readonly />
+        <span asp-validation-for="SaleAbility" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IsEbook">Is Ebook:</label>
+        <input type="checkbox" asp-for="IsEbook" class="form-check-input" disabled />
+        <span asp-validation-for="IsEbook" class="text-danger"></span>
+    </div>
+</form>

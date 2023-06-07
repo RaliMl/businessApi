@@ -1,0 +1,9 @@
+﻿@using GoodeBooks.Services.ViewModels.SearchInfos;
+@model SearchInfoGetViewModel
+
+<form asp-action="GetById" asp-controller="SearchInfo" method="post">
+    <div class="form-group">
+        <label asp-for="TextSnippet">Text Snippet:</label>
+        <textarea class="form-control" asp-for="TextSnippet"></textarea>
+    </div>
+</form>

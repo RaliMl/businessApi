@@ -2,16 +2,15 @@
 @model AuthorCreateViewModel
 
 <form asp-action="CreateNewAuthor" asp-controller="Author" method="post" enctype="multipart/form-data">
-    <div>
+    <div class ="form-group">
         <label asp-for="Name">Name:</label>
-        <input asp-for="Name" />
+        <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="VolumeInfoIds">Volume Info IDs:</label>
-        <input asp-for="VolumeInfoIds" />
-
+        <input asp-for="VolumeInfoIds" class="form-control" />
         <span asp-validation-for="VolumeInfoIds" class="text-danger"></span>
     </div>
 

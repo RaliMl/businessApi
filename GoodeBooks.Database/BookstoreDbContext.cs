@@ -28,6 +28,7 @@ namespace GoodeBooks.Database
             //modelBuilder.Entity<SearchInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.SearchInfo).HasForeignKey<SearchInfo>(f => f.Id));
             //modelBuilder.Entity<VolumeInfo>(s => s.HasOne(o => o.Volume).WithOne(v => v.VolumeInfo).HasForeignKey<VolumeInfo>(f => f.Id));
             modelBuilder.Entity<VolumeInfo>(s => s.HasMany(m => m.Authors).WithMany(m => m.VolumeInfos));
+            modelBuilder.Entity<Bookshelf>(b => b.HasMany(m => m.Volumes).WithMany(m => m.Bookshelves));
 
             modelBuilder.Entity<Volume>()
                 .HasOne(v => v.SearchInfo)

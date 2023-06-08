@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,13 @@ namespace GoodeBooks.Services.ServiceImplementations
                 volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(s => s.Id == model.VolumeInfoId);
                 volume.SaleInfo = context.SaleInfos.FirstOrDefault(s => s.Id == model.SaleInfoId);
                 volume.SearchInfo = context.SearchInfos.FirstOrDefault(s => s.Id == model.SearchInfoId);
+
+                if (model.BookshelfIds != null)
+                {
+                    var bookshelfIds = model.BookshelfIds.Split(',').ToList();
+
+                    volume.Bookshelves = context.Bookshelves.Where(s => bookshelfIds.Contains(s.Id.ToString())).ToList();
+                }
 
                 context.Volumes.Add(volume); 
 
@@ -93,6 +101,11 @@ namespace GoodeBooks.Services.ServiceImplementations
                     volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == model.VolumeInfoId);
                     volume.SaleInfo = context.SaleInfos.FirstOrDefault(x => x.Id == model.SaleInfoId);
                     volume.SearchInfo = context.SearchInfos.FirstOrDefault(x => x.Id == model.SearchInfoId);
+
+                    var bookshelfIds = model.BookshelfIds.Split(',').ToList();
+
+                    volume.Bookshelves = context.Bookshelves.Where(s => bookshelfIds.Contains(s.Id.ToString())).ToList();
+
                     context.Volumes.Update(volume);
 
                     return context.SaveChanges();

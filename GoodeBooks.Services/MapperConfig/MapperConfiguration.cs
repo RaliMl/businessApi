@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ViewModels.Authors;
+using GoodeBooks.Services.ViewModels.Bookshelves;
 using GoodeBooks.Services.ViewModels.SaleInfos;
 using GoodeBooks.Services.ViewModels.SearchInfos;
 using GoodeBooks.Services.ViewModels.VolumeInfos;
@@ -28,6 +29,9 @@ namespace Cars.Services.MapperConfig
 
             CreateMap<Author, AuthorCreateViewModel>().ReverseMap();
             CreateMap<Author, AuthorViewModel>().ReverseMap();
+
+            CreateMap<Bookshelf, BookshelfCreateViewModel>().ReverseMap();
+            CreateMap<Bookshelf, BookshelfViewModel>().ReverseMap();
         }
     }
 }

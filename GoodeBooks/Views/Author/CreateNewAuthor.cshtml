@@ -1,0 +1,19 @@
+﻿@using GoodeBooks.Services.ViewModels.Authors;
+@model AuthorCreateViewModel
+
+<form asp-action="CreateNewAuthor" asp-controller="Author" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="VolumeInfoIds">Volume Info IDs:</label>
+        <input asp-for="VolumeInfoIds" />
+
+        <span asp-validation-for="VolumeInfoIds" class="text-danger"></span>
+    </div>
+
+    <button type="submit">Create</button>
+</form>

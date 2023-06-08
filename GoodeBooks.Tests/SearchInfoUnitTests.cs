@@ -21,18 +21,12 @@ namespace GoodeBooks.Tests
     public class SearchInfoUnitTests
     {
         private SearchInfoCreateViewModel createModel;
-        private SearchInfoUpdateViewModel updateModel;
         private ISearchInfoService service;
         public void Arrange()
         {
             createModel = new SearchInfoCreateViewModel()
             {
                 TextSnippet = "Gatsby"
-            };
-
-            updateModel = new SearchInfoUpdateViewModel()
-            {
-                TextSnippet = "Great"
             };
 
             var options = new DbContextOptionsBuilder<BookstoreDbContext>()
@@ -42,8 +36,7 @@ namespace GoodeBooks.Tests
             IConfigurationProvider configuration = new MapperConfiguration(x =>
             {
                 x.CreateMap<SearchInfo, SearchInfoCreateViewModel>().ReverseMap();
-                x.CreateMap<SearchInfo, SearchInfoGetViewModel>().ReverseMap();
-                x.CreateMap<SearchInfo, SearchInfoUpdateViewModel>().ReverseMap();
+                x.CreateMap<SearchInfo, SearchInfoViewModel>().ReverseMap();
 
             });
             Mapper mapper = new Mapper(configuration);

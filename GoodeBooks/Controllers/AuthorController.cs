@@ -1,15 +1,15 @@
-﻿using GoodeBooks.Services.ServiceContracts.SearchInfos;
+﻿using GoodeBooks.Services.ServiceContracts.Authors;
+using GoodeBooks.Services.ViewModels.Authors;
 using GoodeBooks.Services.ViewModels.SearchInfos;
-using GoodeBooks.Services.ViewModels.Volumes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodeBooks.Controllers
 {
-    public class SearchInfoController : Controller
+    public class AuthorController : Controller
     {
-        private readonly ISearchInfoService service;
+        private readonly IAuthorService service;
 
-        public SearchInfoController(ISearchInfoService service)
+        public AuthorController(IAuthorService service)
         {
             this.service = service;
         }
@@ -18,12 +18,11 @@ namespace GoodeBooks.Controllers
         {
             return View();
         }
-
-        public IActionResult CreateSearchInfo()
+        public IActionResult Create()
         {
-            return View("CreateNewSearchInfo");
+            return View("CreateNewAuthor");
         }
-        public IActionResult CreateNewSearchInfo(SearchInfoCreateViewModel model)
+        public IActionResult CreateNewAuthor(AuthorCreateViewModel model)
         {
             service.Create(model);
             return View(model);
@@ -36,12 +35,12 @@ namespace GoodeBooks.Controllers
         {
             return View(service.Delete(id));
         }
-        public IActionResult UpdateSearchInfo(string id)
+        public IActionResult Update(string id)
         {
-            var searchInfo = service.GetById(id);
-            return View("Update", searchInfo);
+            var author = service.GetById(id);
+            return View("UpdateAuthor", author);
         }
-        public IActionResult Update(SearchInfoViewModel model)
+        public IActionResult UpdateAuthor(AuthorViewModel model)
         {
             var res = service.Update(model);
 

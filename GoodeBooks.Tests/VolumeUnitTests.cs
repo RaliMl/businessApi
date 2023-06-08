@@ -60,8 +60,7 @@ namespace GoodeBooks.Tests
                 x.CreateMap<SaleInfo, SaleInfoUpdateViewModel>().ReverseMap();
 
                 x.CreateMap<SearchInfo, SearchInfoCreateViewModel>().ReverseMap();
-                x.CreateMap<SearchInfo, SearchInfoGetViewModel>().ReverseMap();
-                x.CreateMap<SearchInfo, SearchInfoUpdateViewModel>().ReverseMap();
+                x.CreateMap<SearchInfo, SearchInfoViewModel>().ReverseMap();
 
             });
             Mapper mapper = new Mapper(configuration);

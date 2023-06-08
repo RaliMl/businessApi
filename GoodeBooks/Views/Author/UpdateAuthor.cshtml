@@ -1,0 +1,17 @@
+﻿@using GoodeBooks.Services.ViewModels.Authors;
+@model AuthorViewModel
+
+<form asp-controller="Author" asp-action="UpdateAuthor" method="post">
+    <input hidden asp-for="Id" />
+    <div>
+        <label asp-for="Name">Author Name:</label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="VolumeInfoTitles">Volume Info Titles:</label>
+        <input asp-for="VolumeInfoTitles" />
+    </div>
+
+    <button type="submit">Update</button>
+</form>

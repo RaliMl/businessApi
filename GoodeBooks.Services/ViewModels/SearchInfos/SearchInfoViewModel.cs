@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ViewModels.SearchInfos
 {
-    public class SearchInfoGetViewModel
+    public class SearchInfoViewModel
     {
         public string Id { get; set; }
         public string TextSnippet { get; set; }

@@ -50,32 +50,33 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception ex) { return -1; }
         }
 
-        public ICollection<SearchInfoGetViewModel> GetAll()
+        public ICollection<SearchInfoViewModel> GetAll()
         {
-            try { return mapper.Map<List<SearchInfoGetViewModel>>(context.SearchInfos); }
+            try { return mapper.Map<List<SearchInfoViewModel>>(context.SearchInfos); }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public SearchInfoGetViewModel GetById(string id)
+        public SearchInfoViewModel GetById(string id)
         {
             try
             {
-                var res = mapper.Map<SearchInfoGetViewModel>(context.SearchInfos.FirstOrDefault(x => x.Id == id));
+                var res = mapper.Map<SearchInfoViewModel>(context.SearchInfos.FirstOrDefault(x => x.Id == id));
 
                 return res;
             }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(string id, SearchInfoGetViewModel model)
+        public int Update(SearchInfoViewModel model)
         {
             try
             {
-                var searchInfo = context.SearchInfos.FirstOrDefault(x => x.Id == id);
+                var searchInfo = context.SearchInfos.FirstOrDefault(x => x.Id == model.Id);
 
                 if (searchInfo != null)
                 {
                     searchInfo.TextSnippet = model.TextSnippet;
+
                     context.SearchInfos.Update(searchInfo);
 
                     return context.SaveChanges();

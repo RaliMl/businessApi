@@ -2,7 +2,6 @@ using GoodeBooks.Data;
 using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ViewModels.Volumes;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GoodeBooks.Services.ServiceContracts.Volumes;
@@ -25,6 +24,18 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<BookstoreDbContext>(options =>
 options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<BookstoreDbContext>()
+            .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<UserManager<User>>();
+
+
+//builder.Services.AddDefaultIdentity<User>()
+//    .AddEntityFrameworkStores<BookstoreDbContext>();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IVolumeService, VolumeService>();
 builder.Services.AddScoped<IVolumeInfoService, VolumeInfoService>();
@@ -32,6 +43,15 @@ builder.Services.AddScoped<ISaleInfoService, SaleInfoService>();
 builder.Services.AddScoped<ISearchInfoService, SearchInfoService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookshelfService, BookshelfService>();
+
+//builder.Services.AddScoped<IUserStore<IdentityUser>, UserStore<IdentityUser>>();
+//builder.Services.AddScoped<IUserPasswordStore<IdentityUser>, UserStore<IdentityUser>>();
+//builder.Services.AddScoped<IUserEmailStore<IdentityUser>, UserStore<IdentityUser>>();
+//
+
+builder.Services.AddRazorPages();
+
+builder.Services.AddAuthentication();
 
 builder.Services.AddAutoMapper(o =>
 {
@@ -57,9 +77,6 @@ builder.Services.AddAutoMapper(o =>
 });
 
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BookstoreDbContext>();
 //builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -83,11 +100,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-//app.MapRazorPages();
+app.MapRazorPages();
+
+
 
 app.Run();

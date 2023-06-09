@@ -1,4 +1,6 @@
 ﻿using GoodeBooks.Models.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Database
 {
-    public class BookstoreDbContext : DbContext
+    public class BookstoreDbContext : IdentityDbContext<User>
     {
         public DbSet<Bookshelf> Bookshelves { get; set; }
         public DbSet<Volume> Volumes { get; set; }
@@ -34,6 +36,33 @@ namespace GoodeBooks.Database
                 .HasOne(v => v.SearchInfo)
                 .WithMany() // No navigation property on SearchInfo entity
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+        .HasKey(login => new { login.LoginProvider, login.ProviderKey });
+            modelBuilder.Entity<IdentityUserRole<string>>()
+        .HasKey(userRole => new { userRole.UserId, userRole.RoleId });
+            modelBuilder.Entity<IdentityUserToken<string>>()
+        .HasKey(userToken => new { userToken.UserId, userToken.LoginProvider, userToken.Name });
+
+            base.OnModelCreating(modelBuilder);
+
+            SeedRoles(modelBuilder);
         }
+
+        private void SeedRoles(ModelBuilder modelBuilder)
+        {
+            string[] roleNames = { "Admin", "Employee", "User" };
+
+            foreach (var roleName in roleNames)
+            {
+                modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = roleName,
+                    NormalizedName = roleName.ToUpper()
+                });
+            }
+        }
+
     }
 }

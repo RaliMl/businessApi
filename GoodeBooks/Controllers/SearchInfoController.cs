@@ -1,6 +1,8 @@
-﻿using GoodeBooks.Services.ServiceContracts.SearchInfos;
+﻿using GoodeBooks.Database.Migrations;
+using GoodeBooks.Services.ServiceContracts.SearchInfos;
 using GoodeBooks.Services.ViewModels.SearchInfos;
 using GoodeBooks.Services.ViewModels.Volumes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodeBooks.Controllers
@@ -19,6 +21,7 @@ namespace GoodeBooks.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateSearchInfo()
         {
             return View("CreateNewSearchInfo");
@@ -28,14 +31,17 @@ namespace GoodeBooks.Controllers
             service.Create(model);
             return View(model);
         }
+        [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)
         {
             return View(service.GetById(id));
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id)
         {
             return View(service.Delete(id));
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateSearchInfo(string id)
         {
             var searchInfo = service.GetById(id);

@@ -1,6 +1,7 @@
 ﻿using GoodeBooks.Services.ServiceContracts.VolumeInfos;
 using GoodeBooks.Services.ViewModels.SearchInfos;
 using GoodeBooks.Services.ViewModels.VolumeInfos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodeBooks.Controllers
@@ -19,8 +20,13 @@ namespace GoodeBooks.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateVolumeInfo()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
             return View("CreateNewVolumeInfo");
         }
 
@@ -29,10 +35,12 @@ namespace GoodeBooks.Controllers
             service.Create(model);
             return View(model);
         }
+        [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)
         {
             return View(service.GetById(id));
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(string id)
         {
             var volumeInfo = service.GetById(id);
@@ -44,6 +52,7 @@ namespace GoodeBooks.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id)
         {
             return View(service.Delete(id));

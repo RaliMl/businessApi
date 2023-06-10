@@ -1,7 +1,9 @@
 ﻿using GoodeBooks.Database;
+using GoodeBooks.Database.Migrations;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Volumes;
 using GoodeBooks.Services.ViewModels.Volumes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Scaffolding;
 
@@ -17,7 +19,7 @@ namespace GoodeBooks.Controllers
             this.service = service;
             this.context = context;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateVolume()
         {
             return View("CreateNewVolume");
@@ -28,11 +30,13 @@ namespace GoodeBooks.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)
         {
             return View(service.GetById(id));
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(string id)
         {
             Volume volume = context.Volumes.FirstOrDefault(x => x.Id == id);
@@ -46,6 +50,7 @@ namespace GoodeBooks.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id)
         {
             return View(service.Delete(id));

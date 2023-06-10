@@ -1,6 +1,7 @@
 ﻿using GoodeBooks.Services.ServiceContracts.SaleInfos;
 using GoodeBooks.Services.ViewModels.SaleInfos;
 using GoodeBooks.Services.ViewModels.Volumes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodeBooks.Controllers
@@ -18,6 +19,7 @@ namespace GoodeBooks.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateSaleInfo()
         {
             return View("CreateNewSaleInfo");
@@ -27,10 +29,12 @@ namespace GoodeBooks.Controllers
             service.Create(model);
             return View(model);
         }
+        [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)
         {
             return View(service.GetById(id));
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(string id)
         {
             var saleInfo = service.GetById(id);
@@ -42,6 +46,7 @@ namespace GoodeBooks.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id)
         {
             return View(service.Delete(id));

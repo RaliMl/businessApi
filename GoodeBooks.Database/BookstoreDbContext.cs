@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GoodeBooks.Database
 {
-    public class BookstoreDbContext : IdentityDbContext<User>
+    public class BookstoreDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public DbSet<Bookshelf> Bookshelves { get; set; }
         public DbSet<Volume> Volumes { get; set; }
@@ -46,7 +46,7 @@ namespace GoodeBooks.Database
 
             base.OnModelCreating(modelBuilder);
 
-            SeedRoles(modelBuilder);
+            //SeedRoles(modelBuilder);
         }
 
         private void SeedRoles(ModelBuilder modelBuilder)

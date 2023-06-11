@@ -16,6 +16,7 @@ using GoodeBooks.Services.ServiceContracts.Authors;
 using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
 using GoodeBooks.Services.ServiceContracts;
+using GoodeBooks.Services.ViewModels.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,9 @@ builder.Services.AddAutoMapper(o =>
 
     o.CreateMap<Bookshelf, BookshelfCreateViewModel>().ReverseMap();
     o.CreateMap<Bookshelf, BookshelfViewModel>().ReverseMap();
+
+    o.CreateMap<User, UserCreateViewModel>().ReverseMap();
+    o.CreateMap<User, UserViewModel>().ReverseMap();
 });
 
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();

@@ -1,0 +1,15 @@
+﻿@using GoodeBooks.Services.ViewModels.Users;
+@model UserBookshelfIdsViewModel
+
+<form asp-action="AssignBookshelf" asp-controller="User" method="post">
+    <div class="form-group">
+        <label asp-for="UserId">User ID:</label>
+        <input asp-for="UserId" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BookshelfId">Bookshelf ID:</label>
+        <input asp-for="BookshelfId" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

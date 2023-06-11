@@ -9,7 +9,7 @@ namespace GoodeBooks.Services.ServiceContracts.Bookshelves
 {
     public interface IBookshelfService
     {
-        public int Create(BookshelfCreateViewModel model);
+        public int Create(BookshelfCreateViewModel model, string userId);
         public BookshelfViewModel GetById(long id);
         public int Update(BookshelfViewModel model);
         public ICollection<BookshelfViewModel> GetAll();

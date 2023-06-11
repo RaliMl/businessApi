@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,7 +38,13 @@ namespace GoodeBooks.Database
                 .WithMany() // No navigation property on SearchInfo entity
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<IdentityUserLogin<string>>()
+            modelBuilder.Entity<User>()
+        .HasMany(x => x.Bookshelves)
+        .WithOne()
+        .OnDelete(DeleteBehavior.Cascade);
+        
+
+        modelBuilder.Entity<IdentityUserLogin<string>>()
         .HasKey(login => new { login.LoginProvider, login.ProviderKey });
             modelBuilder.Entity<IdentityUserRole<string>>()
         .HasKey(userRole => new { userRole.UserId, userRole.RoleId });

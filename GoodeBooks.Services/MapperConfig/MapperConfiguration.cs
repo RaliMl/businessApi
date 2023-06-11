@@ -4,6 +4,7 @@ using GoodeBooks.Services.ViewModels.Authors;
 using GoodeBooks.Services.ViewModels.Bookshelves;
 using GoodeBooks.Services.ViewModels.SaleInfos;
 using GoodeBooks.Services.ViewModels.SearchInfos;
+using GoodeBooks.Services.ViewModels.Users;
 using GoodeBooks.Services.ViewModels.VolumeInfos;
 using GoodeBooks.Services.ViewModels.Volumes;
 
@@ -32,6 +33,9 @@ namespace Cars.Services.MapperConfig
 
             CreateMap<Bookshelf, BookshelfCreateViewModel>().ReverseMap();
             CreateMap<Bookshelf, BookshelfViewModel>().ReverseMap();
+
+            CreateMap<User, UserCreateViewModel>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
         }
     }
 }

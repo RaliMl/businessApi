@@ -5,6 +5,7 @@ using GoodeBooks.Services.ViewModels.SaleInfos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace GoodeBooks.Controllers
 {
@@ -21,14 +22,16 @@ namespace GoodeBooks.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         public IActionResult Create()
         {
             return View("CreateBookshelf");
         }
         public IActionResult CreateBookshelf(BookshelfCreateViewModel model)
         {
-            service.Create(model);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            service.Create(model, userId);
             return View(model);
         }
         [Authorize(Roles = "Admin, User")]

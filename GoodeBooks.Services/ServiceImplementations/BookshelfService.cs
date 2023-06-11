@@ -22,17 +22,27 @@ namespace GoodeBooks.Services.ServiceImplementations
             this.context = context;
             this.mapper = mapper;
         }
-        public int Create(BookshelfCreateViewModel model)
+        public int Create(BookshelfCreateViewModel model, string userId)
         {
             try
             {
                 var bookshelf = mapper.Map<Bookshelf>(model);
-                bookshelf.Volumes = context.Volumes.Where(x => model.VolumeIds.Contains(x.Id)).ToList();
+                var volumeNames = model.VolumeNames.Split(',').ToList();
+                bookshelf.Volumes = context.Volumes.Where(x => volumeNames.Contains(x.VolumeInfo.Title)).ToList();
                 bookshelf.Created = DateTime.Now;
                 bookshelf.Updated = DateTime.Now;
                 bookshelf.VolumeCount = bookshelf.Volumes.Count;
 
                 context.Bookshelves.Add(bookshelf);
+
+                if (context.Roles.FirstOrDefault(x => x.Id == context.UserRoles.FirstOrDefault(x => x.UserId == userId).RoleId).Name
+                    == "User")
+                {
+                    var user = context.Users.FirstOrDefault(x => x.Id == userId);
+                    user.Bookshelves.Add(bookshelf);
+
+                    context.Users.Update(user);
+                }
 
                 context.SaveChanges();
 

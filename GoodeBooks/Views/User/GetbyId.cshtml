@@ -1,0 +1,30 @@
+﻿@using GoodeBooks.Services.ViewModels.Users;
+@model UserViewModel
+
+<form asp-action="GetById" asp-controller="User" method="get">
+    <div class="form-group">
+        <label asp-for="Id">ID:</label>
+        <input asp-for="Id" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="CreatedAt">Created At:</label>
+        <input asp-for="CreatedAt" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="ModifiedAt">Modified At:</label>
+        <input asp-for="ModifiedAt" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="BookshelvesNames">Bookshelves Names:</label>
+        <input asp-for="BookshelvesNames" class="form-control" readonly />
+    </div>
+</form>
+

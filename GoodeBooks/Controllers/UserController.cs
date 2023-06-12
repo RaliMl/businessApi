@@ -42,7 +42,6 @@ namespace GoodeBooks.Controllers
         }
         public IActionResult AssignBookshelf(UserBookshelfIdsViewModel model)
         {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var res = service.AssignBookshelf(model);
 
             return View();
@@ -67,9 +66,6 @@ namespace GoodeBooks.Controllers
         public IActionResult DeleteMyAccount()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
-
-            //HttpContext.SignOutAsync();
 
             return View(service.Delete(userId));
         
@@ -91,6 +87,7 @@ namespace GoodeBooks.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = service.GetById(userId);
+
             return View("UpdateMyUserAccount", user);
         }
         public IActionResult UpdateMyUserAccount(UserViewModel model)

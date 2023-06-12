@@ -75,6 +75,21 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
+        public AuthorViewModel GetByName(string name)
+        {
+            try
+            {
+                var author = context.Authors.FirstOrDefault(x => x.Name.Contains(name));
+
+                var res = mapper.Map<AuthorViewModel>(author);
+
+                res.VolumeInfoTitles = string.Join(",", author.VolumeInfos.Select(x => x.Title));
+
+                return res;
+            }
+            catch (Exception e) { throw new Exception("Not found!"); }
+        }
+
         public int Update(AuthorViewModel model)
         {
             try

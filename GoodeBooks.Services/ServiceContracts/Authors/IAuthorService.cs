@@ -11,6 +11,7 @@ namespace GoodeBooks.Services.ServiceContracts.Authors
     {
         public int Create(AuthorCreateViewModel model);
         public AuthorViewModel GetById(string id);
+        public AuthorViewModel GetByName(string name);
         public int Update(AuthorViewModel model);
         public ICollection<AuthorViewModel> GetAll();
         public int Delete(string id);

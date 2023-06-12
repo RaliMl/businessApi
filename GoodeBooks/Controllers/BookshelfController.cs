@@ -1,4 +1,5 @@
-﻿using GoodeBooks.Models.Entities;
+﻿using GoodeBooks.Database;
+using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
 using GoodeBooks.Services.ViewModels.SaleInfos;
@@ -12,10 +13,12 @@ namespace GoodeBooks.Controllers
     public class BookshelfController : Controller
     {
         private readonly IBookshelfService service;
+        private readonly BookstoreDbContext context;
 
-        public BookshelfController(IBookshelfService service)
+        public BookshelfController(IBookshelfService service, BookstoreDbContext context)
         {
             this.service = service;
+            this.context = context;
         }
 
         public IActionResult Index()
@@ -41,14 +44,34 @@ namespace GoodeBooks.Controllers
         }
         
         //check if user is owner
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(long id)
         {
             var bookshelf = service.GetById(id);
             return View("UpdateBookshelf", bookshelf);
         }
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateBookshelf(BookshelfViewModel model)
+        {
+            var res = service.Update(model);
+
+            return View(model);
+        }
+        [Authorize(Roles = "User")]
+        public IActionResult UpdateMyBookshelf (long id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+            if (user.Bookshelves.Select(x => x.Id).Contains(id))
+            {
+                var bookshelf = service.GetById(id);
+                return View("UpdateUserBookshelf", bookshelf);
+            }
+            return Forbid();
+        }
+        [Authorize(Roles = "User")]
+        public IActionResult UpdateUserBookshelf(BookshelfViewModel model)
         {
             var res = service.Update(model);
 

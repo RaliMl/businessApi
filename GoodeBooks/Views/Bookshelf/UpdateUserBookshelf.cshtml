@@ -1,7 +1,7 @@
 ﻿@using GoodeBooks.Services.ViewModels.Bookshelves;
 @model BookshelfViewModel
 
-<form asp-controller="Bookshelf" asp-action="UpdateBookshelf" method="post">
+<form asp-controller="Bookshelf" asp-action="UpdateUserBookshelf" method="post">
     <input hidden asp-for="Id" />
     <div class="form-group">
         <label asp-for="Kind">Country:</label>
@@ -12,16 +12,6 @@
         <label asp-for="Title">Title:</label>
         <input asp-for="Title" class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Created">Created on:</label>
-        <input asp-for="Created" class="form-control" />
-        <span asp-validation-for="Created" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Updated">Updated on:</label>
-        <input asp-for="Updated" class="form-control" />
-        <span asp-validation-for="Updated" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="VolumeCount">Number of volumes:</label>
@@ -36,3 +26,4 @@
 
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
+

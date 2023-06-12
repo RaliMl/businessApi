@@ -35,7 +35,11 @@ namespace GoodeBooks.Controllers
             return View(service.GetById(id));
         }
 
-        //GetByName
+        [Authorize(Roles ="Admin,User")]
+        public IActionResult GetByName(string name)
+        {
+            return View(service.GetByName(name));
+        }
 
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(string id)

@@ -140,6 +140,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                     user.UserName = model.Email;
                     user.NormalizedEmail = model.Email.ToUpper();
                     user.NormalizedUserName = model.Email.ToUpper();
+                    user.PasswordHash = userManager.PasswordHasher.HashPassword(user, model.Password);
 
                     context.Users.Update(user);
 

@@ -1,0 +1,14 @@
+﻿@using GoodeBooks.Services.ViewModels.Authors;
+@model AuthorViewModel
+
+<form asp-action="GetByName" asp-controller="Author" method="get" enctype="multipart/form-data">
+    <div>
+        <label asp-for="Name">Author(s):</label>
+        <input asp-for="Name" readonly />
+    </div>
+
+    <div>
+        <label asp-for="VolumeInfoTitles">Title(s):</label>
+        <textarea asp-for="VolumeInfoTitles" readonly style="width:300px"></textarea>
+    </div>
+</form>

@@ -99,7 +99,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                     bookshelf.Title = model.Title;
                     bookshelf.Updated = DateTime.Now;
                     bookshelf.Title = model.Title;
-                    bookshelf.VolumeCount = model.VolumeCount;
+                    bookshelf.VolumeCount = bookshelf.Volumes.Count();
 
                     context.Bookshelves.Update(bookshelf);
 

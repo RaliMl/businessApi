@@ -1,5 +1,5 @@
 ﻿@using GoodeBooks.Services.ViewModels.Bookshelves;
-@model List<BookshelfViewModel>
+@model PagedList.IPagedList<BookshelfViewModel>
 
 <div class="container">
     <table>
@@ -26,6 +26,14 @@
         </tr>
         }
     </table>
+    @if (Model.Count > 10)
+    {
+        <!-- Previous page button -->
+        <a href="@Url.Action("PreviousPage", new { currentPage = Model.PageNumber })">Previous</a>
+
+        <!-- Next page button -->
+        <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
+    }
 </div>
 
 <link rel="stylesheet" href="/css/table.css" />

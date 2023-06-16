@@ -1,0 +1,33 @@
+﻿@using GoodeBooks.Services.ViewModels.Volumes;
+
+@model PagedList.IPagedList<VolumeViewModel>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Etag</th>
+            <th>Country</th>
+            <th>Text snippet</th>
+            <th></th>
+        </tr>
+        @foreach (var volume in Model)
+        {
+            <tr>
+                <td hidden>@volume.Id</td>
+                <td>@volume.VolumeName</td>
+                <td>@volume.Etag</td>
+                <td>@volume.Country</td>
+                <td>@volume.TextSnippet</td>
+            </tr>
+        }
+    </table>
+
+    <!-- Previous page button -->
+    <a href="@Url.Action("PreviousPage", new { currentPage = Model.PageNumber })">Previous</a>
+
+    <!-- Next page button -->
+    <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
+</div>
+
+<link rel="stylesheet" href="/css/table.css" />

@@ -28,7 +28,20 @@ namespace GoodeBooks.Services.ServiceImplementations
             this.mapper = mapper;
         }
 
-        
+        public int AddToBookshelf(string volumeId, long bookshelfId)
+        {
+            try
+            {
+                var volume = context.Volumes.FirstOrDefault(x => x.Id == volumeId);
+                var bookshelf = context.Bookshelves.FirstOrDefault(x => x.Id == bookshelfId);
+
+                if (!bookshelf.Volumes.Contains(volume))
+                    bookshelf.Volumes.Add(volume);
+                return 1;
+            }
+            catch(Exception ex) { return -1; }
+        }
+
         public int Create(VolumeCreateViewModel model)
         {
             try
@@ -70,7 +83,20 @@ namespace GoodeBooks.Services.ServiceImplementations
 
         public ICollection<VolumeViewModel> GetAll()
         {
-            try { return mapper.Map<List<VolumeViewModel>>(context.Volumes); }
+            try 
+            { 
+                var volumes = context.Volumes.Distinct().ToList();
+                
+                var res = mapper.Map<List<VolumeViewModel>>(volumes); 
+
+                for(int i = 0; i < res.Count; i++)
+                {
+                    res[i].VolumeName = volumes[i].VolumeInfo.Title;
+                    res[i].Country = volumes[i].SaleInfo.Country;
+                    res[i].TextSnippet = volumes[i].SearchInfo.TextSnippet;
+                }
+                return res;
+            }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 

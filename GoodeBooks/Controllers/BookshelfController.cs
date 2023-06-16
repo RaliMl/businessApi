@@ -7,6 +7,7 @@ using Google.Apis.Books.v1.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
 using System.Security.Claims;
 
 namespace GoodeBooks.Controllers
@@ -70,14 +71,34 @@ namespace GoodeBooks.Controllers
 
             return View(model);
         }
+
+        public IActionResult NextPage(int currentPage)
+        {
+
+            // Calculate the next page number
+            var nextPage = currentPage + 1;
+
+            // Redirect to the new page
+            return RedirectToAction("GetAll", new { pageNumber = nextPage });
+        }
+
+        public IActionResult PreviousPage(int currentPage)
+        {
+            // Calculate the previous page number
+            var previousPage = currentPage - 1;
+
+            // Redirect to the new page
+            return RedirectToAction("GetAll", new { pageNumber = previousPage });
+        }
+
         [Authorize(Roles = "User")]
-        public IActionResult UpdateMyBookshelf ()
+        public IActionResult UpdateMyBookshelf (int pageNumber = 1)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var bookshelves = service.GetAll(userId);
 
-            return View("UserBookshelvesTableView", bookshelves);
+            return View("UserBookshelvesTableView", bookshelves.ToPagedList(pageNumber, 10));
         }
         [Authorize(Roles = "User")]
         public IActionResult UpdateUserBookshelf(BookshelfViewModel model)

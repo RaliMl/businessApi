@@ -58,6 +58,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 //
 
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient();
 
 
 builder.Services.AddAutoMapper(o =>

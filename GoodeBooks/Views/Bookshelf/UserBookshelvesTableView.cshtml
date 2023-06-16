@@ -1,0 +1,32 @@
+﻿@using GoodeBooks.Services.ViewModels.Bookshelves;
+@model List<BookshelfViewModel>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Kind</th>
+            <th>Title</th>
+            <th>Number of volumes</th>
+            <th>Titles</th>
+            <th></th>
+        </tr>
+        @foreach (var bookshelf in Model)
+        {
+            <tr>
+                <td hidden>@bookshelf.Id</td>
+                <td>@bookshelf.Kind</td>
+                <td>@bookshelf.Title</td>
+                <td>@bookshelf.VolumeCount</td>
+                <td>@bookshelf.VolumeTitles</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("UpdateUserBookshelf", "Bookshelf", new { id = bookshelf.Id })">Update</a>
+                    </div>
+                </td>
+        </tr>
+        }
+    </table>
+</div>
+
+<link rel="stylesheet" href="/css/table.css" />
+

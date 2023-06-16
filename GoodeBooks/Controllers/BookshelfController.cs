@@ -3,6 +3,7 @@ using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
 using GoodeBooks.Services.ViewModels.SaleInfos;
+using Google.Apis.Books.v1.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -37,10 +38,22 @@ namespace GoodeBooks.Controllers
             service.Create(model, userId);
             return View(model);
         }
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetById(long id)
         {
             return View(service.GetById(id));
+        }
+        [Authorize(Roles = "User")]
+        public IActionResult GetInformation(long id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var user = context.Users.FirstOrDefault(x => x.Id == userId);
+            if (user.Bookshelves.Select(x => x.Id).Contains(id))
+            {
+                return View(service.GetById(id));
+            }
+            return Forbid();
         }
         
         //check if user is owner
@@ -58,17 +71,13 @@ namespace GoodeBooks.Controllers
             return View(model);
         }
         [Authorize(Roles = "User")]
-        public IActionResult UpdateMyBookshelf (long id)
+        public IActionResult UpdateMyBookshelf ()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var user = context.Users.FirstOrDefault(x => x.Id == userId);
-            if (user.Bookshelves.Select(x => x.Id).Contains(id))
-            {
-                var bookshelf = service.GetById(id);
-                return View("UpdateUserBookshelf", bookshelf);
-            }
-            return Forbid();
+            var bookshelves = service.GetAll(userId);
+
+            return View("UserBookshelvesTableView", bookshelves);
         }
         [Authorize(Roles = "User")]
         public IActionResult UpdateUserBookshelf(BookshelfViewModel model)

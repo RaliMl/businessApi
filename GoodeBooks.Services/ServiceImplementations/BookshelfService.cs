@@ -64,9 +64,20 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception ex) { return -1; }
         }
 
-        public ICollection<BookshelfViewModel> GetAll()
+        public ICollection<BookshelfViewModel> GetAll(string userId)
         {
-            try { return mapper.Map<List<BookshelfViewModel>>(context.Bookshelves); }
+            try 
+            {
+                var bookshelves = context.Users.FirstOrDefault(x => x.Id == userId).Bookshelves.ToList();
+                var res = mapper.Map<List<BookshelfViewModel>>(bookshelves);
+
+                for(int i = 0; i < res.Count; i++)
+                {
+                    res[i].VolumeTitles = string.Join(",", context.Volumes.Where(x => bookshelves[i].Volumes.Select(v => v.Id).Contains(x.Id))
+                    .Select(s => s.VolumeInfo.Title));
+                }
+                return res;
+            }
             catch (Exception ex) { throw new Exception("Not found!"); }
         }
 
@@ -95,7 +106,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                 if (bookshelf != null)
                 {
                     var volumeTitles = model.VolumeTitles.Split(',').ToList();
-                    bookshelf.Volumes = context.Volumes.Where(x =>volumeTitles.Contains(x.VolumeInfo.Title)).ToList();
+                    bookshelf.Volumes.Add(context.Volumes.FirstOrDefault(x =>volumeTitles.Contains(x.VolumeInfo.Title)));
                     bookshelf.Title = model.Title;
                     bookshelf.Updated = DateTime.Now;
                     bookshelf.Title = model.Title;

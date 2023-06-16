@@ -1,26 +1,25 @@
 ﻿@using GoodeBooks.Services.ViewModels.Bookshelves;
 @model BookshelfViewModel
 
-<form asp-controller="Bookshelf" asp-action="UpdateBookshelf" method="post">
-    <input hidden asp-for="Id" />
+<form asp-controller="Bookshelf" asp-action="GetInformation" method="get">
     <div class="form-group">
-        <label asp-for="Kind">Kind:</label>
-        <input asp-for="Kind" class="form-control" />
+        <label asp-for="Kind">Country:</label>
+        <input asp-for="Kind" class="form-control" readonly />
         <span asp-validation-for="Kind" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Title">Title:</label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for="Title" class="form-control" readonly />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Created">Created on:</label>
-        <input asp-for="Created" class="form-control" />
+        <input asp-for="Created" class="form-control" readonly />
         <span asp-validation-for="Created" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Updated">Updated on:</label>
-        <input asp-for="Updated" class="form-control" />
+        <input asp-for="Updated" class="form-control" readonly />
         <span asp-validation-for="Updated" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -30,9 +29,8 @@
     </div>
     <div class="form-group">
         <label asp-for="VolumeTitles">Titles:</label>
-        <input asp-for="VolumeTitles" class="form-control" />
+        <input asp-for="VolumeTitles" class="form-control" readonly />
         <span asp-validation-for="VolumeTitles" class="text-danger"></span>
     </div>
-
-    <button type="submit" class="btn btn-primary">Update</button>
 </form>
+

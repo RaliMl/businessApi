@@ -44,6 +44,13 @@ namespace GoodeBooks.Controllers
         {
             return View(service.GetById(id));
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAll (int pageNumber = 1)
+        {
+            return View(service.GetAll().ToPagedList(pageNumber, 10));
+        }
+
         [Authorize(Roles = "User")]
         public IActionResult GetInformation(long id)
         {

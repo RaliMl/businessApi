@@ -3,12 +3,6 @@ using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
-using GoodeBooks.Services.ViewModels.SaleInfos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ServiceImplementations
 {
@@ -79,6 +73,24 @@ namespace GoodeBooks.Services.ServiceImplementations
                 return res;
             }
             catch (Exception ex) { throw new Exception("Not found!"); }
+        }
+
+        public ICollection<BookshelfViewModel> GetAll()
+        {
+
+            try
+            {
+                var bookshelves = context.Bookshelves.ToList();
+                var res = mapper.Map<List<BookshelfViewModel>>(bookshelves);
+
+                for (int i = 0; i < res.Count; i++)
+                {
+                    res[i].VolumeTitles = string.Join(",", context.Volumes.Where(x => bookshelves[i].Volumes.Select(v => v.Id).Contains(x.Id))
+                    .Select(s => s.VolumeInfo.Title));
+                }
+                return res;
+            }
+            catch(Exception ex) { throw new Exception("Not found!"); }
         }
 
         public BookshelfViewModel GetById(long id)

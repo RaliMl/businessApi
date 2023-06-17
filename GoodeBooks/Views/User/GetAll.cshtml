@@ -1,0 +1,36 @@
+﻿@using GoodeBooks.Services.ViewModels.Users;
+@model PagedList.IPagedList<UserViewModel>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created at</th>
+            <th>Bookshleves</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td hidden>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.CreatedAt</td>
+                <td>@user.BookshelvesNames</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Update", "User", new { id = user.Id })">Update</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Delete", "User", new { id = user.Id })">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+    <link rel="stylesheet" href="/css/table.css" />
+

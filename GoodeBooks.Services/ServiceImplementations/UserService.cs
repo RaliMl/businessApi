@@ -152,5 +152,20 @@ namespace GoodeBooks.Services.ServiceImplementations
             }
             catch (Exception ex) { return -1; }
         }
+
+        public ICollection<UserViewModel> GetAll()
+        {
+            try
+            {
+                var users = context.Users.ToList();
+                var res = mapper.Map<List<UserViewModel>>(users);
+
+                for (int i = 0; i < res.Count; i++)
+                    res[i].BookshelvesNames = string.Join(",", users[i].Bookshelves.Select(x => x.Title).ToList());
+
+                return res;
+            }
+            catch(Exception ex) { throw new Exception("Not found"); }
+        }
     }
 }

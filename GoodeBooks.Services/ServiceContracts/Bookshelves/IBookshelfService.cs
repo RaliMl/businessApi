@@ -13,6 +13,7 @@ namespace GoodeBooks.Services.ServiceContracts.Bookshelves
         public BookshelfViewModel GetById(long id);
         public int Update(BookshelfViewModel model);
         public ICollection<BookshelfViewModel> GetAll(string userId);
+        public ICollection<BookshelfViewModel> GetAll();
         public int Delete(long id);
     }
 }

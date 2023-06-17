@@ -15,6 +15,7 @@ namespace GoodeBooks.Services.ServiceContracts
         public Task<int> Create(UserCreateViewModel model);
         public bool AssignBookshelf(UserBookshelfIdsViewModel model);
         public UserViewModel GetById(string id);
+        public ICollection<UserViewModel> GetAll();
         public int Delete(string id);
         public int Update(UserViewModel model);
     }

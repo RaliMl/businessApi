@@ -72,12 +72,11 @@ namespace GoodeBooks.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Update(string id)
         {
-            Volume volume = context.Volumes.FirstOrDefault(x => x.Id == id);
-            VolumeUpdateViewModel updateModel = new VolumeUpdateViewModel() { Id = volume.Id, SaleInfoId =  volume.SaleInfo.Id, 
-                SearchInfoId = volume.SearchInfo.Id, VolumeInfoId = volume.VolumeInfo.Id };
-            return View("UpdateVolume", updateModel);
+            var volume = service.GetById(id);
+            
+            return View("UpdateVolume", volume);
         }
-        public IActionResult UpdateVolume(VolumeUpdateViewModel model) 
+        public IActionResult UpdateVolume(VolumeViewModel model) 
         {
             var res = service.Update(model);
 

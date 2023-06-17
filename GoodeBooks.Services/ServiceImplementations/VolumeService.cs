@@ -115,7 +115,7 @@ namespace GoodeBooks.Services.ServiceImplementations
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 
-        public int Update(VolumeUpdateViewModel model)
+        public int Update(VolumeViewModel model)
         {
             try
             {
@@ -124,13 +124,13 @@ namespace GoodeBooks.Services.ServiceImplementations
                 if (model != null)
                 {
 
-                    volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(x => x.Id == model.VolumeInfoId);
-                    volume.SaleInfo = context.SaleInfos.FirstOrDefault(x => x.Id == model.SaleInfoId);
-                    volume.SearchInfo = context.SearchInfos.FirstOrDefault(x => x.Id == model.SearchInfoId);
+                    volume.VolumeInfo.Title = model.VolumeName;
+                    volume.SaleInfo.Country = model.Country;
+                    volume.SearchInfo.TextSnippet = model.TextSnippet;
 
-                    var bookshelfIds = model.BookshelfIds.Split(',').ToList();
+                    //var bookshelfIds = model.BookshelfIds.Split(',').ToList();
 
-                    volume.Bookshelves = context.Bookshelves.Where(s => bookshelfIds.Contains(s.Id.ToString())).ToList();
+                    //volume.Bookshelves = context.Bookshelves.Where(s => bookshelfIds.Contains(s.Id.ToString())).ToList();
 
                     context.Volumes.Update(volume);
 

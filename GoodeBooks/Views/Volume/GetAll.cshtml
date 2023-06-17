@@ -19,14 +19,15 @@
                 <td>@volume.Etag</td>
                 <td>@volume.Country</td>
                 <td>@volume.TextSnippet</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Update", "Volume", new { id = volume.Id })">Update</a>
+                    </div>
+                </td>
             </tr>
         }
     </table>
-
-    <!-- Previous page button -->
     <a href="@Url.Action("PreviousPage", new { currentPage = Model.PageNumber })">Previous</a>
-
-    <!-- Next page button -->
     <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
 </div>
 

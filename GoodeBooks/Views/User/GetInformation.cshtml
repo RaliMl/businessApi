@@ -2,10 +2,7 @@
 @model UserViewModel
 
 <form asp-action="GetInformation" asp-controller="User" method="get">
-    <div class="form-group">
-        <label asp-for="Id">ID:</label>
-        <input asp-for="Id" class="form-control" readonly />
-    </div>
+    <input hidden asp-for="Id"/>
     <div class="form-group">
         <label asp-for="Name">Name:</label>
         <input asp-for="Name" class="form-control" readonly />

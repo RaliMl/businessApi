@@ -1,23 +1,30 @@
 ﻿@using GoodeBooks.Services.ViewModels.Volumes;
 
-@model VolumeUpdateViewModel
+@model VolumeViewModel
 
 <form asp-action="UpdateVolume" asp-controller="Volume" method="post">
     <input hidden asp-for="Id" />
     <div>
-        <label asp-for="VolumeInfoId"></label>
-        <input asp-for="VolumeInfoId" style="width=300px"/>
+        <label asp-for="Kind">Kind:</label>
+        <input asp-for="Kind" style="width:300px" readonly />
     </div>
 
     <div>
-        <label asp-for="SaleInfoId"></label>
-        <input asp-for="SaleInfoId" />
+        <label asp-for="Etag">Etag:</label>
+        <input asp-for="Etag" />
     </div>
 
     <div>
-        <label asp-for="SearchInfoId"></label>
-        <input asp-for="SearchInfoId" />
+        <label asp-for="VolumeName">Title:</label>
+        <input asp-for="VolumeName" />
     </div>
-
+    <div>
+        <label asp-for="Country">Country:</label>
+        <input asp-for="Country" />
+    </div>
+    <div>
+        <label asp-for="TextSnippet">Text snippet:</label>
+        <input asp-for="TextSnippet" />
+    </div>
     <button type="submit">Update</button>
 </form>

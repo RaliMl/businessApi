@@ -1,6 +1,7 @@
 ﻿@using GoodeBooks.Services.ViewModels.Volumes;
 @model VolumeViewModel
 
+<div class="form-container">
 <form asp-action="GetById" asp-controller="Volume" method="get">
     <div>
         <label asp-for="Kind"></label>
@@ -14,7 +15,7 @@
 
     <div>
         <label asp-for="VolumeName"></label>
-        <input asp-for="VolumeName" readonly />
+            <input asp-for="VolumeName" class="title" readonly />
     </div>
 
     <div>
@@ -26,4 +27,28 @@
         <label asp-for="TextSnippet">Text Snippet:</label>
         <textarea class="form-control" asp-for="TextSnippet"></textarea>
     </div>
+    <img src="@Model.ImageUrl" alt="Image" class="form-image">
 </form>
+</div>
+
+<style>
+    .form-image {
+        max-width: 200px; /* Set the maximum width of the image */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Ensure the image is displayed as a block element */
+        margin-bottom: 10px; /* Add some bottom margin for spacing */
+        margin-top: -200px;
+        float: right; /* Float the image to the right */
+        margin-right:500px;
+    }
+    .form-control {
+        max-width: 500px;
+    }
+
+    .form-container {
+        overflow: hidden; /* Clear the float to contain the form and image */
+    }
+    .title {
+        width: 450px;
+    }
+</style>

@@ -34,7 +34,7 @@ namespace GoodeBooks.Controllers
             var apiKey = "AIzaSyBqS2mVmBj7KmfsWE_1w8qdEsSrGdHegbc";
             var max = 40;
             //var url = $"https://www.googleapis.com/books/v1/volumes?q=programming&maxResults={count}&key={apiKey}";
-            var url = $"https://www.googleapis.com/books/v1/volumes?q=*&maxResults={max}&key={apiKey}";
+            var url = $"https://www.googleapis.com/books/v1/volumes?q=classic&maxResults={max}&key={apiKey}";
 
             var response = await _httpClient.GetAsync(url);
 
@@ -68,6 +68,11 @@ namespace GoodeBooks.Controllers
                         googleBook.VolumeInfo.PageCount = 0;
                     if (googleBook.VolumeInfo.Language == null)
                         googleBook.VolumeInfo.Language = "Not specified";
+                    if (googleBook.VolumeInfo.ImageLinks == null)
+                        googleBook.VolumeInfo.ImageLinks = new GoogleImageLinks()
+                        {
+                            SmallThumbnail = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                        };
 
                     var book = new Volume
                     {
@@ -82,7 +87,8 @@ namespace GoodeBooks.Controllers
                             PublishedDate = googleBook.VolumeInfo.PublishedDate,
                             Description = googleBook.VolumeInfo.Description,
                             PageCount = googleBook.VolumeInfo.PageCount,
-                            Language = googleBook.VolumeInfo.Language
+                            Language = googleBook.VolumeInfo.Language,
+                            ImageUrl = googleBook.VolumeInfo.ImageLinks.SmallThumbnail
                         },
                         SaleInfo = new SaleInfo
                         {
@@ -94,7 +100,7 @@ namespace GoodeBooks.Controllers
                         SearchInfo = new SearchInfo { TextSnippet = googleBook.SearchInfo.TextSnippet, Id = Guid.NewGuid().ToString() }
                         // Map other properties as needed
                     };
-                    if (context.Volumes.FirstOrDefault(x => x.Etag == book.Etag) != null)
+                    if (context.Volumes.FirstOrDefault(x => x.VolumeInfo.Title == book.VolumeInfo.Title) != null)
                         continue;
                     //if (book.VolumeInfo.Subtitle == null)
                     //    book.VolumeInfo.Subtitle = "A book";
@@ -223,7 +229,14 @@ namespace GoodeBooks.Controllers
             public string Description { get; set; }
             public int PageCount { get; set; }
             public string Language { get; set; }
+            public GoogleImageLinks ImageLinks { get; set; }
         }
+
+        public class GoogleImageLinks
+        {
+            public string SmallThumbnail { get; set; }
+        }
+
 
         //public class GoogleBookshelvesResponse
         //{

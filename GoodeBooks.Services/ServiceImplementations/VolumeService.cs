@@ -94,6 +94,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                     res[i].VolumeName = volumes[i].VolumeInfo.Title;
                     res[i].Country = volumes[i].SaleInfo.Country;
                     res[i].TextSnippet = volumes[i].SearchInfo.TextSnippet;
+                    res[i].ImageUrl = context.VolumeInfos.Where(x => x.Id == volumes[i].VolumeInfo.Id).Select(x => x.ImageUrl).First();
                 }
                 return res;
             }
@@ -109,6 +110,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                 res.VolumeName = volume.VolumeInfo.Title;
                 res.Country = volume.SaleInfo.Country;
                 res.TextSnippet = volume.SearchInfo.TextSnippet;
+                res.ImageUrl = context.VolumeInfos.Where(x => x.Id == volume.VolumeInfo.Id).Select(x => x.ImageUrl).First();
 
                 return res;
             }
@@ -127,6 +129,7 @@ namespace GoodeBooks.Services.ServiceImplementations
                     volume.VolumeInfo.Title = model.VolumeName;
                     volume.SaleInfo.Country = model.Country;
                     volume.SearchInfo.TextSnippet = model.TextSnippet;
+                    volume.VolumeInfo.ImageUrl = model.ImageUrl;
 
                     //var bookshelfIds = model.BookshelfIds.Split(',').ToList();
 

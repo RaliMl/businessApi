@@ -5,6 +5,7 @@
 <div class="container">
     <table>
         <tr>
+            <th></th>
             <th>Title</th>
             <th>Etag</th>
             <th>Country</th>
@@ -14,6 +15,7 @@
         @foreach (var volume in Model)
         {
             <tr>
+                <td><img src="@volume.ImageUrl" alt="Image" class="table-image"></td>
                 <td hidden>@volume.Id</td>
                 <td>@volume.VolumeName</td>
                 <td>@volume.Etag</td>

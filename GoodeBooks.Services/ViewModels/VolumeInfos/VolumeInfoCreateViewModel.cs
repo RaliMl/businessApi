@@ -23,5 +23,7 @@ namespace GoodeBooks.Services.ViewModels.VolumeInfos
         public int PageCount { get; set; }
         [Required]
         public string Language { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

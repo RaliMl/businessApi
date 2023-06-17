@@ -14,5 +14,6 @@ namespace GoodeBooks.Services.ViewModels.Volumes
         public string VolumeName { get; set; }
         public string Country { get; set; }
         public string TextSnippet { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

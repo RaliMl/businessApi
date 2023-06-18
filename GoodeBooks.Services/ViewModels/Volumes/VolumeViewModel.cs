@@ -15,6 +15,6 @@ namespace GoodeBooks.Services.ViewModels.Volumes
         public string Country { get; set; }
         public string TextSnippet { get; set; }
         public string ImageUrl { get; set; }
-        public int Rate { get; set; }
+        public double AverageRate { get; set; }
     }
 }

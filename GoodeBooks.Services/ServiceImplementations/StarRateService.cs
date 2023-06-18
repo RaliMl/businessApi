@@ -34,6 +34,10 @@ namespace GoodeBooks.Services.ServiceImplementations
                 res.Name = user.Name;
                 res.Volume = volume;
 
+                volume.AverageRate = (volume.AverageRate + res.Rate) / 2;
+
+                context.Volumes.Update(volume);
+
                 var check = context.Ratings.FirstOrDefault(x => (x.Name == res.Name && x.Volume.VolumeInfo.Title == res.Volume.VolumeInfo.Title)) == null;
                 if (!check)
                 {

@@ -17,6 +17,8 @@ using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
 using GoodeBooks.Services.ServiceContracts;
 using GoodeBooks.Services.ViewModels.Users;
+using GoodeBooks.Services.ServiceContracts.StarRate;
+using GoodeBooks.Services.ViewModels.StarRate;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +53,7 @@ builder.Services.AddScoped<ISearchInfoService, SearchInfoService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookshelfService, BookshelfService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IStarRateService, StarRateService>();
 
 //builder.Services.AddScoped<IUserStore<IdentityUser>, UserStore<IdentityUser>>();
 //builder.Services.AddScoped<IUserPasswordStore<IdentityUser>, UserStore<IdentityUser>>();
@@ -85,6 +88,8 @@ builder.Services.AddAutoMapper(o =>
 
     o.CreateMap<User, UserCreateViewModel>().ReverseMap();
     o.CreateMap<User, UserViewModel>().ReverseMap();
+
+    o.CreateMap<StarRate, StarRateCreateViewModel>().ReverseMap();
 });
 
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();

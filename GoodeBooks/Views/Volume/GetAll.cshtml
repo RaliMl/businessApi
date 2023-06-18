@@ -10,6 +10,7 @@
             <th>Etag</th>
             <th>Country</th>
             <th>Text snippet</th>
+            <th>Rating</th>
             <th></th>
         </tr>
         @foreach (var volume in Model)
@@ -21,6 +22,16 @@
                 <td>@volume.Etag</td>
                 <td>@volume.Country</td>
                 <td>@volume.TextSnippet</td>
+                <td class="rating-column">
+                    <div class="star-rating">
+                        @for (var i = 5; i >= 1; i--)
+                        {
+                            <input type="radio" name="rating-@volume.Id" id="rating-@volume.Id-@i" value="@i" class="star-icon visually-hidden" data-volume="@volume.Id" />
+                            <label for="rating-@volume.Id-@i"><i class="fa fa-star"></i></label>
+                        }
+                       
+                    </div>
+                </td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-primary" href="@Url.Action("Update", "Volume", new { id = volume.Id })">Update</a>
@@ -33,4 +44,68 @@
     <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
 </div>
 
-<link rel="stylesheet" href="/css/table.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="~/css/table.css" />
+
+<style>
+    .star-rating {
+        display: inline-block;
+    }
+
+    .star-icon {
+        display: none;
+    }
+
+        .star-icon:checked ~ label {
+            color: gold;
+        }
+
+    .visually-hidden {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        width: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.star-icon').change(function () {
+            var rating = parseInt($(this).val());
+            var volumeId = $(this).data('volume');
+            var $stars = $(this).closest('.star-rating').find('label');
+
+            $stars.each(function (index) {
+                var starIndex = index + 1;
+                if (starIndex <= rating) {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            });
+
+            var volumeTitle = $(this).closest('tr').find('td:eq(2)').text();
+            HandleRatingChanged(volumeTitle, rating);
+        });
+    });
+
+
+    function HandleRatingChanged(volumeTitle, rating) {
+        $.ajax({
+            type: 'POST',
+            url: '/StarRate/AddRate',
+            data: { volumeTitle: volumeTitle, rate: rating },
+            success: function () {
+                console.log('Rating updated successfully');
+            },
+            error: function () {
+                console.log('Rating updated successfully');
+            }
+        });
+    }
+</script>

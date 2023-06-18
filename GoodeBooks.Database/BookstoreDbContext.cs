@@ -20,6 +20,7 @@ namespace GoodeBooks.Database
         public DbSet<SaleInfo> SaleInfos { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<StarRate> Ratings { get; set; }
 
         public BookstoreDbContext(DbContextOptions<BookstoreDbContext> dbContextOptionsBuilder) : base(dbContextOptionsBuilder)
         {

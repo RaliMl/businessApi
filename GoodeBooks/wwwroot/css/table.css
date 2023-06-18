@@ -19,7 +19,7 @@ td {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -28,4 +28,13 @@ td {
     width: 100px;
     height: auto; 
     
+}
+
+.rating-column {
+    width:500px;
+}
+
+.hover,
+.hover.filled {
+    color: gold; /* Adjust the color as per your preference */
 }

@@ -15,6 +15,7 @@ namespace GoodeBooks.Models.Entities
         public virtual SaleInfo SaleInfo { get; set; }
         public virtual SearchInfo SearchInfo { get; set; }
         public virtual ICollection<Bookshelf>? Bookshelves { get; set; }
+        public int? Rate { get; set; }
 
     }
 }

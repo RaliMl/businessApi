@@ -14,6 +14,6 @@ namespace GoodeBooks.Services.ViewModels.Bookshelves
         public DateTime Updated { get; set; }
         public DateTime Created { get; set; }
         public int VolumeCount { get; set; }
-        public string VolumeTitles { get; set; }
+        public string? VolumeTitles { get; set; }
     }
 }

@@ -117,8 +117,14 @@ namespace GoodeBooks.Services.ServiceImplementations
 
                 if (bookshelf != null)
                 {
-                    var volumeTitles = model.VolumeTitles.Split(',').ToList();
-                    bookshelf.Volumes.Add(context.Volumes.FirstOrDefault(x =>volumeTitles.Contains(x.VolumeInfo.Title)));
+
+                    if (model.VolumeTitles != null)
+                    {
+                        List<string>? volumeTitles = model.VolumeTitles.Split(',').ToList();
+                        bookshelf.Volumes.Add(context.Volumes.FirstOrDefault(x => volumeTitles.Contains(x.VolumeInfo.Title)));
+                    }
+                    else
+                        bookshelf.Volumes = new List<Volume>();
                     bookshelf.Title = model.Title;
                     bookshelf.Updated = DateTime.Now;
                     bookshelf.Title = model.Title;

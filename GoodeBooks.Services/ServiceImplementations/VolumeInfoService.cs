@@ -84,7 +84,11 @@ namespace GoodeBooks.Services.ServiceImplementations
                     volumeInfo.Subtitle = model.Subtitle;
                     volumeInfo.Title = model.Title;
                     volumeInfo.Description = model.Description;
-                    volumeInfo.Authors = context.Authors.Where(x => model.Authors.Contains(x.Name)).ToList();
+
+                    var authors = context.Authors.Where(x => model.Authors.Contains(x.Name)).ToList();
+                    if(!volumeInfo.Authors.Equals(authors))
+                        volumeInfo.Authors = context.Authors.Where(x => model.Authors.Contains(x.Name)).ToList();
+
                     volumeInfo.PublishedDate = model.PublishedDate;
                     volumeInfo.PageCount = model.PageCount;
                     volumeInfo.Language = model.Language;

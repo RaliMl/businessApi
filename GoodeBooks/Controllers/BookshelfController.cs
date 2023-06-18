@@ -64,7 +64,6 @@ namespace GoodeBooks.Controllers
             return Forbid();
         }
         
-        //check if user is owner
         [Authorize(Roles = "Admin")]
         public IActionResult Update(long id)
         {

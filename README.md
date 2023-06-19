@@ -1,4 +1,4 @@
-GoogeBooks .NET Project
+GoodeBooks .NET Project
 GoodeBooks is a project built using the Google Books API.
 It is a web application that allows users to search for books, view book details, and save their favorite books for later reference. 
 The project aims to provide a user-friendly interface for exploring and discovering books using the extensive Google Books database.

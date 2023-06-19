@@ -1,0 +1,48 @@
+﻿@using GoodeBooks.Services.ViewModels.Authors;
+@model PagedList.IPagedList<AuthorViewModel>
+
+<form method="get" asp-action="Search" asp-controller="Author">
+    <input type="text" name="searchTerm" placeholder="Search...">
+    <input type="submit" value="Search">
+</form>
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Titles</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var author in Model)
+        {
+            <tr>
+                <td hidden>@author.Id</td>
+                <td>@author.Name</td>
+                <td>@author.VolumeInfoTitles</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Update", "Author", new { id = author.Id })">Update</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Delete", "Author", new { id = author.Id })">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+    <!-- Previous page button -->
+    <a href="@Url.Action("PreviousPage", new { currentPage = Model.PageNumber })">Previous</a>
+
+    <!-- Next page button -->
+    <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
+
+</div>
+
+<link rel="stylesheet" href="/css/table.css" />
+
+
+
+
+

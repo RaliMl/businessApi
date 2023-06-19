@@ -3,6 +3,7 @@ using GoodeBooks.Services.ViewModels.Authors;
 using GoodeBooks.Services.ViewModels.SearchInfos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
 
 namespace GoodeBooks.Controllers
 {
@@ -23,7 +24,12 @@ namespace GoodeBooks.Controllers
         public IActionResult Create()
         {
             return View("CreateNewAuthor");
-        }        
+        }
+
+        public IActionResult Search(string searchTerm, int pageNumber = 1)
+        {
+            return View("GetAll", service.Search(searchTerm).ToPagedList(pageNumber, 10));
+        }
         public IActionResult CreateNewAuthor(AuthorCreateViewModel model)
         {
             service.Create(model);
@@ -38,6 +44,30 @@ namespace GoodeBooks.Controllers
         public IActionResult GetById(string id)
         {
             return View(service.GetById(id));
+        }
+
+        public IActionResult GetAll(int pageNumber = 1)
+        {
+            return View(service.GetAll().ToPagedList(pageNumber, 10));
+        }
+
+        public IActionResult NextPage(int currentPage)
+        {
+
+            // Calculate the next page number
+            var nextPage = currentPage + 1;
+
+            // Redirect to the new page
+            return RedirectToAction("GetAll", new { pageNumber = nextPage });
+        }
+
+        public IActionResult PreviousPage(int currentPage)
+        {
+            // Calculate the previous page number
+            var previousPage = currentPage - 1;
+
+            // Redirect to the new page
+            return RedirectToAction("GetAll", new { pageNumber = previousPage });
         }
 
         [Authorize(Roles ="Admin,User")]

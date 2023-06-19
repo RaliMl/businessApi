@@ -23,6 +23,6 @@ namespace GoodeBooks.Services.ViewModels.Volumes
         public string SaleInfoId { get; set; }
         [Required]
         public string SearchInfoId { get; set; }
-        public string BookshelfIds { get; set; }
+        public string? BookshelfIds { get; set; }
     }
 }

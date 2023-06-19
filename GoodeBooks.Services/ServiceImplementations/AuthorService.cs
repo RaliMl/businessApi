@@ -4,6 +4,7 @@ using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Authors;
 using GoodeBooks.Services.ViewModels.Authors;
 using GoodeBooks.Services.ViewModels.SaleInfos;
+using GoodeBooks.Services.ViewModels.Volumes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,22 @@ namespace GoodeBooks.Services.ServiceImplementations
         {
             this.context = context;
             this.mapper = mapper;
+        }
+
+        public ICollection<AuthorViewModel> Search(string searchTerm)
+        {
+            var authors = context.Authors.Where(x => x.Name.Contains(searchTerm)).ToList();
+
+            if (authors != null)
+            {
+                var res = mapper.Map<List<AuthorViewModel>>(authors);
+
+                for (int i = 0; i < res.Count; i++)
+                    res[i].VolumeInfoTitles = string.Join(",", authors[i].VolumeInfos.Select(x => x.Title));
+
+                return res;
+            }
+            return null;
         }
         public int Create(AuthorCreateViewModel model)
         {
@@ -65,7 +82,21 @@ namespace GoodeBooks.Services.ServiceImplementations
 
         public ICollection<AuthorViewModel> GetAll()
         {
-            try { return mapper.Map<List<AuthorViewModel>>(context.Authors); }
+            try 
+            {
+                var authors = context.Authors.ToList();
+
+                if(authors != null)
+                {
+                    var res = mapper.Map<List<AuthorViewModel>>(authors);
+
+                    for(int i = 0; i< res.Count; i++)
+                        res[i].VolumeInfoTitles = string.Join(",", authors[i].VolumeInfos.Select(x => x.Title));
+                    return res;
+                }
+                return null;
+                 
+            }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 

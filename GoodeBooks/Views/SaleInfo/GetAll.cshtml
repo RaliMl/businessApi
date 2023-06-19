@@ -1,0 +1,40 @@
+﻿@using GoodeBooks.Services.ViewModels.SaleInfos;
+@model PagedList.IPagedList<SaleInfoViewModel>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Country</th>
+            <th>SaleAbility</th>
+            <th>Is Ebook</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var saleInfo in Model)
+        {
+            <tr>
+                <td hidden>@saleInfo.Id</td>
+                <td>@saleInfo.Country</td>
+                <td>@saleInfo.SaleAbility</td>
+                <td>@saleInfo.IsEbook</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Update", "SaleInfo", new { id = saleInfo.Id })">Update</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Delete", "SaleInfo", new { id = saleInfo.Id })">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+        <!-- Previous page button -->
+        <a href="@Url.Action("PreviousPage", new { currentPage = Model.PageNumber })">Previous</a>
+
+        <!-- Next page button -->
+        <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
+</div>
+
+<link rel="stylesheet" href="/css/table.css" />

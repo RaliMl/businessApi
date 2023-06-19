@@ -14,7 +14,7 @@ namespace GoodeBooks.Services.ViewModels.VolumeInfos
         public string Title { get; set; }
         public string Subtitle { get; set; }
         [Required]
-        public ICollection<string> AuthorIds { get; set; }
+        public string? Authors { get; set; }
         [Required]
         public DateTime PublishedDate { get; set; }
         [Required]
@@ -24,6 +24,6 @@ namespace GoodeBooks.Services.ViewModels.VolumeInfos
         [Required]
         public string Language { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

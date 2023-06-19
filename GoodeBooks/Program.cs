@@ -19,6 +19,7 @@ using GoodeBooks.Services.ServiceContracts;
 using GoodeBooks.Services.ViewModels.Users;
 using GoodeBooks.Services.ServiceContracts.StarRate;
 using GoodeBooks.Services.ViewModels.StarRate;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +55,9 @@ builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookshelfService, BookshelfService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IStarRateService, StarRateService>();
+builder.Services.AddScoped<StringBuilder>();
+
+builder.Services.AddSession();
 
 //builder.Services.AddScoped<IUserStore<IdentityUser>, UserStore<IdentityUser>>();
 //builder.Services.AddScoped<IUserPasswordStore<IdentityUser>, UserStore<IdentityUser>>();
@@ -126,6 +130,7 @@ using (var scope = app.Services.CreateScope())
 
     app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

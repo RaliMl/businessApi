@@ -16,9 +16,10 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="VolumeInfoId"></label>
-        <input asp-for="VolumeInfoId" class="form-control" />
-        <span asp-validation-for="VolumeInfoId" class="text-danger"></span>
+        <label asp-for="VolumeInfotTitle">VolumeInfo:</label>
+        <input asp-for="VolumeInfotTitle" class="form-control" />
+        <span asp-validation-for="VolumeInfotTitle" class="text-danger"></span>
+        <a class="btn btn-primary" href="@Url.Action("CreateVolumeInfo", "VolumeInfo")">Create information</a>
     </div>
 
     <div class="form-group">

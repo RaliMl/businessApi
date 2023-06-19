@@ -27,11 +27,21 @@ namespace GoodeBooks.Services.ServiceImplementations
         {
             try
             {
-                var author = mapper.Map<Author>(model);
-                var volumeInfoIds = model.VolumeInfoIds.Split(',').ToList();
-                author.VolumeInfos = context.VolumeInfos.Where(x => volumeInfoIds.Contains(x.Id)).ToList();
+                var mappedAuthor = mapper.Map<Author>(model);
+                var authors = model.Names.Split(',').ToList();
+                foreach (var author in authors)
+                {
+                    if (model.VolumeInfoIds != null)
+                    {
+                        var volumeInfoIds = model.VolumeInfoIds.Split(',').ToList();
+                        mappedAuthor.VolumeInfos = context.VolumeInfos.Where(x => volumeInfoIds.Contains(x.Id)).ToList();
+                    }
+                    else
+                        mappedAuthor.VolumeInfos = new List<VolumeInfo>();
+                    mappedAuthor.Name = author;
 
-                context.Authors.Add(author);
+                    context.Authors.Add(mappedAuthor);
+                }
 
                 context.SaveChanges();
 

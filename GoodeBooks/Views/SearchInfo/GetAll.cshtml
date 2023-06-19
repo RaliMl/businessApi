@@ -1,0 +1,41 @@
+﻿@using GoodeBooks.Services.ViewModels.SearchInfos;
+@model PagedList.IPagedList<SearchInfoViewModel>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Test</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var searchInfo in Model)
+        {
+            <tr>
+                <td hidden>@searchInfo.Id</td>
+                <td>@searchInfo.TextSnippet</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("UpdateSearchInfo", "SearchInfo", new { id = searchInfo.Id })">Update</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Delete", "SearchInfo", new { id = searchInfo.Id })">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+    <!-- Previous page button -->
+    <a href="@Url.Action("PreviousPage", new { currentPage = Model.PageNumber })">Previous</a>
+
+    <!-- Next page button -->
+    <a href="@Url.Action("NextPage", new { currentPage = Model.PageNumber })">Next</a>
+
+</div>
+
+<link rel="stylesheet" href="/css/table.css" />
+
+
+
+

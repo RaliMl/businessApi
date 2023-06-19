@@ -11,7 +11,7 @@ namespace GoodeBooks.Services.ViewModels.Authors
     public class AuthorCreateViewModel
     {
         [Required]
-        public string Name { get; set; }
-        public string VolumeInfoIds { get; set; }
+        public string Names { get; set; }
+        public string? VolumeInfoIds { get; set; }
     }
 }

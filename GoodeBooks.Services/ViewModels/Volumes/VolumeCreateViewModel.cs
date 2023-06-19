@@ -18,7 +18,7 @@ namespace GoodeBooks.Services.ViewModels.Volumes
         [Required]
         public string Etag { get; set; }
         [Required]
-        public string VolumeInfoId { get; set; }
+        public string VolumeInfotTitle { get; set; }
         [Required]
         public string SaleInfoId { get; set; }
         [Required]

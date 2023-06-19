@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PagedList;
 using System.Security.Claims;
+using System.Text;
 
 namespace GoodeBooks.Controllers
 {
@@ -16,11 +17,13 @@ namespace GoodeBooks.Controllers
     {
         private readonly IBookshelfService service;
         private readonly BookstoreDbContext context;
+        private readonly StringBuilder stringBuilder;
 
-        public BookshelfController(IBookshelfService service, BookstoreDbContext context)
+        public BookshelfController(IBookshelfService service, BookstoreDbContext context, StringBuilder stringBuilder)
         {
             this.service = service;
             this.context = context;
+            this.stringBuilder = stringBuilder;
         }
 
         public IActionResult Index()

@@ -3,6 +3,7 @@ using GoodeBooks.Services.ViewModels.SaleInfos;
 using GoodeBooks.Services.ViewModels.Volumes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
 
 namespace GoodeBooks.Controllers
 {
@@ -26,13 +27,39 @@ namespace GoodeBooks.Controllers
         }
         public IActionResult CreateNewSaleInfo(SaleInfoCreateViewModel model)
         {
-            service.Create(model);
-            return View(model);
+            var id = service.Create(model);
+
+            TempData["SaleInfoId"] = id;
+            TempData.Keep("SaleInfoId");
+
+            return Redirect("/Volume/CreateVolume");
         }
         [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)
         {
             return View(service.GetById(id));
+        }
+        public IActionResult GetAll(int pageNumber = 1)
+        {
+            return View(service.GetAll().ToPagedList(pageNumber, 10));
+        }
+        public IActionResult NextPage(int currentPage)
+        {
+
+            // Calculate the next page number
+            var nextPage = currentPage + 1;
+
+            // Redirect to the new page
+            return RedirectToAction("GetAll", new { pageNumber = nextPage });
+        }
+
+        public IActionResult PreviousPage(int currentPage)
+        {
+            // Calculate the previous page number
+            var previousPage = currentPage - 1;
+
+            // Redirect to the new page
+            return RedirectToAction("GetAll", new { pageNumber = previousPage });
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Update(string id)

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ServiceImplementations
@@ -27,9 +28,20 @@ namespace GoodeBooks.Services.ServiceImplementations
         {
             try
             {
-                var volumeInfo = mapper.Map<VolumeInfo>(model);
+                var volumeInfo = new VolumeInfo()
+                {
+                    Title = model.Title,
+                    Subtitle = model.Subtitle,
+                    PublishedDate = model.PublishedDate,
+                    Description = model.Description,
+                    PageCount = model.PageCount,
+                    Language = model.Language,
+                    ImageUrl = model.ImageUrl
+                };
 
-                volumeInfo.Authors = context.Authors.Where(x => model.AuthorIds.Contains(x.Id)).ToList();
+                var authors = model.Authors.Split(',').ToList();
+
+                volumeInfo.Authors = context.Authors.Where(x => authors.Contains(x.Name)).ToList();
 
                 context.VolumeInfos.Add(volumeInfo);
 
@@ -55,7 +67,19 @@ namespace GoodeBooks.Services.ServiceImplementations
 
         public ICollection<VolumeInfoViewModel> GetAll()
         {
-            try { return mapper.Map<List<VolumeInfoViewModel>>(context.VolumeInfos); }
+            try 
+            {
+                var volumeInfos = context.VolumeInfos.ToList();
+
+                var res = mapper.Map<List<VolumeInfoViewModel>>(volumeInfos);
+
+                for(int i = 0; i< res.Count; i++)
+                {
+                    res[i].Authors = string.Join(", ", volumeInfos[i].Authors.Select(x => x.Name).ToList());
+                }
+
+                return res; 
+            }
             catch (Exception e) { throw new Exception("Not found!"); }
         }
 

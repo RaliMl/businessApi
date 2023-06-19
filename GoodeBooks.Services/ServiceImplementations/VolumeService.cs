@@ -48,7 +48,7 @@ namespace GoodeBooks.Services.ServiceImplementations
             {
                 var volume = mapper.Map<Volume>(model);
 
-                volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(s => s.Id == model.VolumeInfoId);
+                volume.VolumeInfo = context.VolumeInfos.FirstOrDefault(s => s.Title == model.VolumeInfotTitle);
                 volume.SaleInfo = context.SaleInfos.FirstOrDefault(s => s.Id == model.SaleInfoId);
                 volume.SearchInfo = context.SearchInfos.FirstOrDefault(s => s.Id == model.SearchInfoId);
 

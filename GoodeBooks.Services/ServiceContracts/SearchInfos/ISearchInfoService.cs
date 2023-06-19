@@ -9,7 +9,7 @@ namespace GoodeBooks.Services.ServiceContracts.SearchInfos
 {
     public interface ISearchInfoService
     {
-        public int Create(SearchInfoCreateViewModel model);
+        public string Create(SearchInfoCreateViewModel model);
         public SearchInfoViewModel GetById(string id);
         public int Update(SearchInfoViewModel model);
         public ICollection<SearchInfoViewModel> GetAll();

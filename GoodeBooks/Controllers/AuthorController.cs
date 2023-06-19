@@ -27,7 +27,12 @@ namespace GoodeBooks.Controllers
         public IActionResult CreateNewAuthor(AuthorCreateViewModel model)
         {
             service.Create(model);
-            return View(model);
+
+            string authorsName = model.Names;
+            TempData["AuthorsNames"] = authorsName;
+            HttpContext.Session.SetString("AuthorsName", model.Names);
+
+            return Redirect("/VolumeInfo/CreateVolumeInfo");//View(model);
         }
         [Authorize(Roles = "Admin")]
         public IActionResult GetById(string id)

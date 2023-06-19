@@ -22,7 +22,7 @@ namespace GoodeBooks.Services.ServiceImplementations
             this.context = context;
             this.mapper = mapper;
         }
-        public int Create(SaleInfoCreateViewModel model)
+        public string Create(SaleInfoCreateViewModel model)
         {
             try
             {
@@ -32,9 +32,9 @@ namespace GoodeBooks.Services.ServiceImplementations
 
                 context.SaveChanges();
 
-                return 1;
+                return saleInfo.Id;
             }
-            catch (Exception ex) { return -1; }
+            catch (Exception ex) { return null; }
         }
 
         public int Delete(string id)

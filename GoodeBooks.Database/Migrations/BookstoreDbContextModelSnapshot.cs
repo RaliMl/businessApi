@@ -37,7 +37,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasIndex("VolumeInfosId");
 
-                    b.ToTable("AuthorVolumeInfo");
+                    b.ToTable("AuthorVolumeInfo", (string)null);
                 });
 
             modelBuilder.Entity("BookshelfVolume", b =>
@@ -52,7 +52,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasIndex("VolumesId");
 
-                    b.ToTable("BookshelfVolume");
+                    b.ToTable("BookshelfVolume", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.Author", b =>
@@ -66,7 +66,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.Bookshelf", b =>
@@ -101,7 +101,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bookshelves");
+                    b.ToTable("Bookshelves", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.SaleInfo", b =>
@@ -122,7 +122,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SaleInfos");
+                    b.ToTable("SaleInfos", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.SearchInfo", b =>
@@ -136,7 +136,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SearchInfos");
+                    b.ToTable("SearchInfos", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.StarRate", b =>
@@ -163,7 +163,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasIndex("VolumeId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Ratings", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.User", b =>
@@ -276,7 +276,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasIndex("VolumeInfoId");
 
-                    b.ToTable("Volumes");
+                    b.ToTable("Volumes", (string)null);
                 });
 
             modelBuilder.Entity("GoodeBooks.Models.Entities.VolumeInfo", b =>
@@ -311,7 +311,7 @@ namespace GoodeBooks.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VolumeInfos");
+                    b.ToTable("VolumeInfos", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

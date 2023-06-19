@@ -23,7 +23,39 @@ namespace GoodeBooks.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreateVolume()
         {
-            return View("CreateNewVolume");
+            string title = TempData["VolumeInfoTitle"] as string;
+            string saleInfoId = TempData["SaleInfoId"] as string;
+            string searchInfoId = TempData["SearchInfoId"] as string;
+            VolumeCreateViewModel model;
+            if (title != null)
+            {
+                TempData.Keep("VolumeInfoTitle");
+                if (saleInfoId != null)
+                {
+                    TempData.Keep("SaleInfoId");
+                    if (searchInfoId != null)
+                    {
+                        TempData.Keep("SearchInfoId");
+                        model = new VolumeCreateViewModel()
+                        {
+                            VolumeInfotTitle = title,
+                            SaleInfoId = saleInfoId,
+                            SearchInfoId = searchInfoId
+                        };
+                    }
+                    model = new VolumeCreateViewModel()
+                    {
+                        VolumeInfotTitle = title,
+                        SaleInfoId = saleInfoId
+                    };
+                }
+                model = new VolumeCreateViewModel()
+                {
+                    VolumeInfotTitle = title
+                };
+                return View("CreateNewVolume", model);
+            }
+            else return View("CreateNewVolume");
         }
         public IActionResult CreateNewVolume(VolumeCreateViewModel model) 
         { 

@@ -13,9 +13,10 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="AuthorIds"></label>
-        <input asp-for="AuthorIds" class="form-control" />
-        <small class="text-muted">Enter author IDs separated by commas.</small>
+        <label asp-for="Authors"></label>
+        <input asp-for="Authors" class="form-control" />
+        <small class="text-muted">Enter authors separated by commas.</small>
+        <a class="btn btn-primary" href="@Url.Action("Create", "Author")">Create author</a>
     </div>
 
     <div class="form-group">

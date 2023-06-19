@@ -68,7 +68,29 @@
                                 <ul class="submenu">
                                     <li><a class="nav-link text-dark" asp-controller="Volume" asp-action="CreateVolume">Create</a></li>
                                     <li><a class="nav-link text-dark" asp-controller="Volume" asp-action="GetAll">Get information</a></li>
-                                    <li><a class="nav-link text-dark" asp-controller="Volume" asp-action="Delete">Delete</a></li>
+                                </ul>
+                            </li>
+
+                             <li class="nav-item">
+                                <a class="nav-link text-dark">Volumes information</a>
+                                <ul class="submenu">
+                                    <li><a class="nav-link text-dark" asp-controller="VolumeInfo" asp-action="GetAll">Get information</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark">Sales information</a>
+                                <ul class="submenu">
+                                    <li><a class="nav-link text-dark" asp-controller="SaleInfo" asp-action="CreateSaleInfo">Create</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="SaleInfo" asp-action="GetAll">Get information</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark">Search information</a>
+                                <ul class="submenu">
+                                    <li><a class="nav-link text-dark" asp-controller="SearchInfo" asp-action="CreateSearchInfo">Create</a></li>
+                                    <li><a class="nav-link text-dark" asp-controller="SearchInfo" asp-action="GetAll">Get information</a></li>
                                 </ul>
                             </li>
 

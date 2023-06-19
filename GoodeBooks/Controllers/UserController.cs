@@ -60,20 +60,15 @@ namespace GoodeBooks.Controllers
 
         public IActionResult NextPage(int currentPage)
         {
-
-            // Calculate the next page number
             var nextPage = currentPage + 1;
 
-            // Redirect to the new page
             return RedirectToAction("GetAll", new { pageNumber = nextPage });
         }
 
         public IActionResult PreviousPage(int currentPage)
         {
-            // Calculate the previous page number
             var previousPage = currentPage - 1;
 
-            // Redirect to the new page
             return RedirectToAction("GetAll", new { pageNumber = previousPage });
         }
 

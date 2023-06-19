@@ -3,15 +3,9 @@ using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts;
 using GoodeBooks.Services.ViewModels.Users;
-using GoodeBooks.Services.ViewModels.VolumeInfos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ServiceImplementations
 {
@@ -54,8 +48,6 @@ namespace GoodeBooks.Services.ServiceImplementations
             try
             {
                 var user = mapper.Map<User>(model);
-                //var bookshelfIds = model.BookshelvesIds.Split(',').ToList();
-                //user.Bookshelves = context.Bookshelves.Where(x => bookshelfIds.Contains(x.Id.ToString())).ToList();
                 user.CreatedAt = DateTime.Now;
                 user.ModifiedAt = DateTime.Now;
                 var hashedPassword = userManager.PasswordHasher.HashPassword(user, model.Password);

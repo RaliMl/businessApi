@@ -3,14 +3,6 @@ using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Authors;
 using GoodeBooks.Services.ViewModels.Authors;
-using GoodeBooks.Services.ViewModels.SaleInfos;
-using GoodeBooks.Services.ViewModels.Volumes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ServiceImplementations
 {

@@ -1,18 +1,8 @@
 ﻿using AutoMapper;
-using Azure.Core;
-using Cars.Services.MapperConfig;
 using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Volumes;
 using GoodeBooks.Services.ViewModels.Volumes;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodeBooks.Services.ServiceImplementations
 {
@@ -149,10 +139,6 @@ namespace GoodeBooks.Services.ServiceImplementations
                     volume.SaleInfo.Country = model.Country;
                     volume.SearchInfo.TextSnippet = model.TextSnippet;
                     volume.VolumeInfo.ImageUrl = model.ImageUrl;
-
-                    //var bookshelfIds = model.BookshelfIds.Split(',').ToList();
-
-                    //volume.Bookshelves = context.Bookshelves.Where(s => bookshelfIds.Contains(s.Id.ToString())).ToList();
 
                     context.Volumes.Update(volume);
 

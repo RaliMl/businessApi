@@ -3,7 +3,6 @@ using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
-using GoodeBooks.Services.ViewModels.Volumes;
 
 namespace GoodeBooks.Services.ServiceImplementations
 {

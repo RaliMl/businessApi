@@ -26,6 +26,7 @@ namespace GoodeBooks.Controllers
             return View("CreateNewAuthor");
         }
 
+        [Authorize(Roles = "Admin,User")]
         public IActionResult Search(string searchTerm, int pageNumber = 1)
         {
             return View("GetAll", service.Search(searchTerm).ToPagedList(pageNumber, 10));
@@ -38,7 +39,7 @@ namespace GoodeBooks.Controllers
             TempData["AuthorsNames"] = authorsName;
             HttpContext.Session.SetString("AuthorsName", model.Names);
 
-            return Redirect("/VolumeInfo/CreateVolumeInfo");//View(model);
+            return Redirect("/VolumeInfo/CreateVolumeInfo");
         }
         [Authorize(Roles = "Admin")]
         public IActionResult GetById(string id)
@@ -46,6 +47,7 @@ namespace GoodeBooks.Controllers
             return View(service.GetById(id));
         }
 
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetAll(int pageNumber = 1)
         {
             return View(service.GetAll().ToPagedList(pageNumber, 10));
@@ -53,20 +55,15 @@ namespace GoodeBooks.Controllers
 
         public IActionResult NextPage(int currentPage)
         {
-
-            // Calculate the next page number
             var nextPage = currentPage + 1;
 
-            // Redirect to the new page
             return RedirectToAction("GetAll", new { pageNumber = nextPage });
         }
 
         public IActionResult PreviousPage(int currentPage)
         {
-            // Calculate the previous page number
             var previousPage = currentPage - 1;
 
-            // Redirect to the new page
             return RedirectToAction("GetAll", new { pageNumber = previousPage });
         }
 

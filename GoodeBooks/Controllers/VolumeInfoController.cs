@@ -26,6 +26,7 @@ namespace GoodeBooks.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin,User")]
         public IActionResult Search(string searchTerm, int pageNumber = 1)
         {
             return View("GetAll", service.Search(searchTerm).ToPagedList(pageNumber, 10));
@@ -57,13 +58,10 @@ namespace GoodeBooks.Controllers
 
         public IActionResult CreateNewVolumeInfo(VolumeInfoCreateViewModel model)
         {
-            //model.Authors = new List<string>();
-            //model.Authors.Add(TempData["AuthorsName"] as string);
-
             service.Create(model);
             TempData["VolumeInfoTitle"] = model.Title;
             TempData.Keep("VolumeInfoTitle");
-            return Redirect("/Volume/CreateVolume");//View(model);
+            return Redirect("/Volume/CreateVolume");
         }
         [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)
@@ -71,6 +69,7 @@ namespace GoodeBooks.Controllers
             return View(service.GetById(id));
         }
 
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetAll(int pageNumber = 1)
         {
             return View(service.GetAll().ToPagedList(pageNumber, 10));
@@ -78,11 +77,7 @@ namespace GoodeBooks.Controllers
 
         public IActionResult NextPage(int currentPage)
         {
-
-            // Calculate the next page number
             var nextPage = currentPage + 1;
-
-            // Redirect to the new page
             return RedirectToAction("GetAll", new { pageNumber = nextPage });
         }
 

@@ -83,7 +83,7 @@ namespace GoodeBooks.Tests
             {
                 Title = "The Great Gatsby",
                 Subtitle = "A Novel",
-                AuthorIds = new List<string>() { "author123", "author456" },
+                //Authors = new List<string>() { "author123", "author456" },
                 PublishedDate = DateTime.Parse("2022-03-15"),
                 Description = "The Great Gatsby is a novel written by F. Scott Fitzgerald.",
                 PageCount = 180,
@@ -136,7 +136,7 @@ namespace GoodeBooks.Tests
             {
                 Kind = "book",
                 Etag = "WxZ123456",
-                VolumeInfoId = volumeInfoId,
+                VolumeInfotTitle = volumeInfoId,
                 SaleInfoId = saleInfoId,
                 SearchInfoId = searchInfoId
             };

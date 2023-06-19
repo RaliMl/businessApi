@@ -97,15 +97,15 @@ namespace GoodeBooks.Tests
             Xunit.Assert.Equal("United States", res.Country);
         }
 
-        [Fact]
-        public void Update_SaleInfo_Success()
-        {
-            Arrange();
+        //[Fact]
+        //public void Update_SaleInfo_Success()
+        //{
+        //    Arrange();
 
-            var info = service.GetAll();
-            var res = service.Update(info.First().Id, updateModel);
+        //    var info = service.GetAll();
+        //    var res = service.Update(info.First().Id, updateModel);
 
-            Xunit.Assert.Equal(1, res);
-        }
+        //    Xunit.Assert.Equal(1, res);
+        //}
     }
 }

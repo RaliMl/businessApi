@@ -1,17 +1,15 @@
 ﻿using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
-using GoodeBooks.Services.Converter;
+using GoodeBooks.Models.Entities.APIEntities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using static GoodeBooks.Controllers.BookApiController;
 
 namespace GoodeBooks.Controllers
 {
     [ApiController]
     [Route("api/books")]
+    [Authorize(Roles = "Admin")]
     public class BookApiController : Controller
     {
         public IActionResult Index()
@@ -60,7 +58,7 @@ namespace GoodeBooks.Controllers
                     if (googleBook.VolumeInfo.Subtitle == null)
                         googleBook.VolumeInfo.Subtitle = "A book";
                     if (googleBook.VolumeInfo.PublishedDate == null)
-                        googleBook.VolumeInfo.PublishedDate = new DateTime();
+                        googleBook.VolumeInfo.PublishedDate = "0001-01-01 00:00:00.0000000";
                     if (googleBook.VolumeInfo.Description == null)
                         googleBook.VolumeInfo.Description = "A book";
                     if (googleBook.VolumeInfo.PageCount == null)
@@ -83,7 +81,7 @@ namespace GoodeBooks.Controllers
                             Title = googleBook.VolumeInfo.Title,
                             Subtitle = googleBook.VolumeInfo.Subtitle,
                             Authors = googleBook.VolumeInfo.Authors.Select(authorName => new Author { Name = authorName }).ToList(),
-                            PublishedDate = googleBook.VolumeInfo.PublishedDate,
+                            PublishedDate = Convert.ToDateTime(googleBook.VolumeInfo.PublishedDate),
                             Description = googleBook.VolumeInfo.Description,
                             PageCount = googleBook.VolumeInfo.PageCount,
                             Language = googleBook.VolumeInfo.Language,
@@ -113,41 +111,8 @@ namespace GoodeBooks.Controllers
             {
                 return NotFound();
             }
-        }
-        
-        public class GoogleBooksResponse
-        {
-            public int TotalItems { get; set; }
-            public List<GoogleBook> Items { get; set; }
-        }
-
-        public class GoogleBook
-        {
-            public string Kind { get; set; }
-            public string Etag { get; set; }
-            public virtual GoogleVolumeInfo VolumeInfo { get; set; }
-            public virtual SaleInfo SaleInfo { get; set; }
-            public virtual SearchInfo SearchInfo { get; set; }
-        }
-
-        public class GoogleVolumeInfo
-        {
-            public string Id { get; set; }
-            public string Title { get; set; }
-            public string Subtitle { get; set; }
-            public virtual ICollection<string> Authors { get; set; }
-            [JsonConverter(typeof(DateConverter))]
-            public DateTime PublishedDate { get; set; }
-            public string Description { get; set; }
-            public int PageCount { get; set; }
-            public string Language { get; set; }
-            public GoogleImageLinks ImageLinks { get; set; }
-        }
-
-        public class GoogleImageLinks
-        {
-            public string SmallThumbnail { get; set; }
-        }
+        }       
+       
     }
 }
 

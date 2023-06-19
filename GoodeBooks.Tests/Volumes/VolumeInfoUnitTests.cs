@@ -27,7 +27,7 @@ namespace GoodeBooks.Tests.Volumes
             createModel = new VolumeInfoCreateViewModel();
             createModel.Title = "The Great Gatsby";
             createModel.Subtitle = "A Novel";
-            createModel.AuthorIds = new List<string>() { "author123", "author456" };
+            //createModel.Authors = new List<string>() { "author123", "author456" };
             createModel.PublishedDate = DateTime.Parse("2022-03-15");
             createModel.Description = "The Great Gatsby is a novel written by F. Scott Fitzgerald.";
             createModel.PageCount = 180;

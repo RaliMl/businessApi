@@ -11,6 +11,8 @@ namespace GoodeBooks.Services.ServiceContracts.SaleInfos
     {
         public string Create(SaleInfoCreateViewModel model);
         public SaleInfoViewModel GetById(string id);
+
+        public ICollection<SaleInfoViewModel> Search(string searchTerm);
         public int Update(SaleInfoViewModel model);
         public ICollection<SaleInfoViewModel> GetAll();
         public int Delete(string id);

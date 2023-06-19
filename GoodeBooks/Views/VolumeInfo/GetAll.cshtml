@@ -1,6 +1,10 @@
 ﻿@using GoodeBooks.Services.ViewModels.VolumeInfos;
 @model PagedList.IPagedList<VolumeInfoViewModel>
 
+<form method="get" asp-action="Search" asp-controller="VolumeInfo">
+    <input type="text" name="searchTerm" placeholder="Search...">
+    <input type="submit" value="Search">
+</form>
 <div class="container">
     <table>
         <tr>

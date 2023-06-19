@@ -28,6 +28,25 @@ namespace GoodeBooks.Services.ServiceImplementations
             this.mapper = mapper;
         }
 
+        public ICollection<VolumeViewModel> Search(string searchTerm)
+        {
+            var volumes = context.Volumes.Where(x => x.VolumeInfo.Title.Contains(searchTerm)).ToList();
+
+            if (volumes != null)
+            {
+                var res = mapper.Map<List<VolumeViewModel>>(volumes);
+
+                for (int i = 0; i < res.Count; i++)
+                {
+                    res[i].VolumeName = volumes[i].VolumeInfo.Title;
+                    res[i].Country = volumes[i].SaleInfo.Country;
+                    res[i].TextSnippet = volumes[i].SearchInfo.TextSnippet;
+                    res[i].ImageUrl = context.VolumeInfos.Where(x => x.Id == volumes[i].VolumeInfo.Id).Select(x => x.ImageUrl).First();
+                }
+                return res;
+            }
+            return null;
+        }
         public int AddToBookshelf(string volumeId, long bookshelfId)
         {
             try

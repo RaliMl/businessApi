@@ -24,6 +24,23 @@ namespace GoodeBooks.Services.ServiceImplementations
             this.context = context;
             this.mapper = mapper;
         }
+
+        public ICollection<VolumeInfoViewModel> Search(string searchTerm)
+        {
+            var volumeInfos = context.VolumeInfos.Where(x => x.Title.Contains(searchTerm)).ToList();
+
+            if (volumeInfos != null)
+            {
+                var res = mapper.Map<List<VolumeInfoViewModel>>(volumeInfos);
+
+                for (int i = 0; i < res.Count; i++)
+                {
+                    res[i].Authors = string.Join(", ", volumeInfos[i].Authors.Select(x => x.Name).ToList());
+                }
+                return res;
+            }
+            return null;
+        }
         public int Create(VolumeInfoCreateViewModel model)
         {
             try

@@ -12,6 +12,7 @@ namespace GoodeBooks.Services.ServiceContracts.VolumeInfos
     {
         public int Create(VolumeInfoCreateViewModel model);
         public VolumeInfoViewModel GetById(string id);
+        public ICollection<VolumeInfoViewModel> Search(string searchTerm);
         public int Update(VolumeInfoViewModel model);
         public ICollection<VolumeInfoViewModel> GetAll();
         public int Delete(string id);

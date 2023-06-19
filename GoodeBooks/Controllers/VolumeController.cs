@@ -20,6 +20,12 @@ namespace GoodeBooks.Controllers
             this.service = service;
             this.context = context;
         }
+
+        public IActionResult Search(string searchTerm, int pageNumber = 1)
+        {
+            return View("GetAll", service.Search(searchTerm).ToPagedList(pageNumber, 10));
+        }
+
         [Authorize(Roles = "Admin")]
         public IActionResult CreateVolume()
         {

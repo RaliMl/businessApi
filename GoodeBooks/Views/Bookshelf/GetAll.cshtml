@@ -1,6 +1,10 @@
 ﻿@using GoodeBooks.Services.ViewModels.Bookshelves;
 @model PagedList.IPagedList<BookshelfViewModel>
 
+<form method="get" asp-action="Search" asp-controller="Bookshelf">
+    <input type="text" name="searchTerm" placeholder="Search...">
+    <input type="submit" value="Search">
+</form>
 <div class="container">
     <table>
         <tr>

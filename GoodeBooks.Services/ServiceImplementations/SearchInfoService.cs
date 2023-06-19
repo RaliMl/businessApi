@@ -4,6 +4,7 @@ using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.SearchInfos;
 using GoodeBooks.Services.ViewModels.SaleInfos;
 using GoodeBooks.Services.ViewModels.SearchInfos;
+using GoodeBooks.Services.ViewModels.Volumes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,20 @@ namespace GoodeBooks.Services.ServiceImplementations
             this.context = context;
             this.mapper = mapper;
         }
+
+        public ICollection<SearchInfoViewModel> Search(string searchTerm)
+        {
+            var volumes = context.SearchInfos.Where(x => x.TextSnippet.Contains(searchTerm)).ToList();
+
+            if (volumes != null)
+            {
+                var res = mapper.Map<List<SearchInfoViewModel>>(volumes);
+
+                return res;
+            }
+            return null;
+        }
+
         public string Create(SearchInfoCreateViewModel model)
         {
             try

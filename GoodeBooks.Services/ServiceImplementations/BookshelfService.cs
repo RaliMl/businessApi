@@ -3,6 +3,7 @@ using GoodeBooks.Database;
 using GoodeBooks.Models.Entities;
 using GoodeBooks.Services.ServiceContracts.Bookshelves;
 using GoodeBooks.Services.ViewModels.Bookshelves;
+using GoodeBooks.Services.ViewModels.Volumes;
 
 namespace GoodeBooks.Services.ServiceImplementations
 {
@@ -15,6 +16,24 @@ namespace GoodeBooks.Services.ServiceImplementations
         {
             this.context = context;
             this.mapper = mapper;
+        }
+
+        public ICollection<BookshelfViewModel> Search(string searchTerm)
+        {
+            var bookshelves = context.Bookshelves.Where(x => x.Title.Contains(searchTerm)).ToList();
+
+            if (bookshelves != null)
+            {
+                var res = mapper.Map<List<BookshelfViewModel>>(bookshelves);
+
+                for (int i = 0; i < res.Count; i++)
+                {
+                    res[i].VolumeTitles = string.Join(",", context.Volumes.Where(x => bookshelves[i].Volumes.Select(v => v.Id).Contains(x.Id))
+                    .Select(s => s.VolumeInfo.Title));
+                }
+                return res;
+            }
+            return null;
         }
         public int Create(BookshelfCreateViewModel model, string userId)
         {

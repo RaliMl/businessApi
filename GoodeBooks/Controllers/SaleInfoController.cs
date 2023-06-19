@@ -39,7 +39,7 @@ namespace GoodeBooks.Controllers
             TempData["SaleInfoId"] = id;
             TempData.Keep("SaleInfoId");
 
-            return Redirect("/Volume/CreateVolume");
+            return View(model);
         }
         [Authorize(Roles = "Admin, User")]
         public IActionResult GetById(string id)

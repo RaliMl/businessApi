@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodeBooks.Database", "Good
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodeBooks.Models", "GoodeBooks.Models\GoodeBooks.Models.csproj", "{F6089C92-A73A-422D-8590-0A9DA7835280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodeBooks.Services", "GoodeBooks.Services\GoodeBooks.Services.csproj", "{D801C761-2193-4CDC-A018-EEDD498FC64C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodeBooks.Services", "GoodeBooks.Services\GoodeBooks.Services.csproj", "{D801C761-2193-4CDC-A018-EEDD498FC64C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodeBooks.Tests", "GoodeBooks.Tests\GoodeBooks.Tests.csproj", "{48ED2EBC-A4F7-46B1-84E5-279A0BA7A6E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodeBooks.Tests", "GoodeBooks.Tests\GoodeBooks.Tests.csproj", "{48ED2EBC-A4F7-46B1-84E5-279A0BA7A6E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

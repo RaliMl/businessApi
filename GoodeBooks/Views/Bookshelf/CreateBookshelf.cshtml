@@ -5,16 +5,19 @@
     <div class="form-group">
         <label asp-for="Kind">Kind:</label>
         <input asp-for="Kind" class="form-control" />
+        <span asp-validation-for="Kind" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Title">Title:</label>
         <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="VolumeNames">Volume Titles:</label>
         <input asp-for="VolumeNames" class="form-control" />
+        <span asp-validation-for="VolumeNames" class="text-danger"></span>
     </div>
 
     <button type="submit">Create</button>

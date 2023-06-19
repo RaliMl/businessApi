@@ -21,11 +21,21 @@ namespace GoodeBooks.Services.ServiceImplementations
             try
             {
                 var bookshelf = mapper.Map<Bookshelf>(model);
-                var volumeNames = model.VolumeNames.Split(',').ToList();
-                bookshelf.Volumes = context.Volumes.Where(x => volumeNames.Contains(x.VolumeInfo.Title)).ToList();
-                bookshelf.Created = DateTime.Now;
+
+                if (model.VolumeNames != null)
+                {
+                    var volumeNames = model.VolumeNames.Split(',').ToList();
+                    bookshelf.Volumes = context.Volumes.Where(x => volumeNames.Contains(x.VolumeInfo.Title)).ToList();
+                    bookshelf.VolumeCount = bookshelf.Volumes.Count;
+                }
+                else
+                {
+                    bookshelf.Volumes = null;
+                    bookshelf.VolumeCount = 0;
+                }
+                    bookshelf.Created = DateTime.Now;
                 bookshelf.Updated = DateTime.Now;
-                bookshelf.VolumeCount = bookshelf.Volumes.Count;
+                
 
                 context.Bookshelves.Add(bookshelf);
 

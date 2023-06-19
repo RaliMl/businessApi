@@ -45,10 +45,13 @@ namespace GoodeBooks.Controllers
             return View(service.GetById(id));
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetAll (int pageNumber = 1)
         {
-            return View(service.GetAll().ToPagedList(pageNumber, 10));
+            if(User.IsInRole("Admin"))
+                return View(service.GetAll().ToPagedList(pageNumber, 10));
+            else 
+                return View(service.GetAll(User.FindFirstValue(ClaimTypes.NameIdentifier)).ToPagedList(pageNumber, 10));
         }
 
         [Authorize(Roles = "User")]
@@ -64,13 +67,14 @@ namespace GoodeBooks.Controllers
             return Forbid();
         }
         
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult Update(long id)
         {
             var bookshelf = service.GetById(id);
             return View("UpdateBookshelf", bookshelf);
         }
-        [Authorize(Roles = "Admin")]
+
+        [Authorize(Roles = "Admin,User")]
         public IActionResult UpdateBookshelf(BookshelfViewModel model)
         {
             var res = service.Update(model);
@@ -97,22 +101,6 @@ namespace GoodeBooks.Controllers
             return RedirectToAction("GetAll", new { pageNumber = previousPage });
         }
 
-        [Authorize(Roles = "User")]
-        public IActionResult UpdateMyBookshelf (int pageNumber = 1)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var bookshelves = service.GetAll(userId);
-
-            return View("UserBookshelvesTableView", bookshelves.ToPagedList(pageNumber, 10));
-        }
-        [Authorize(Roles = "User")]
-        public IActionResult UpdateUserBookshelf(BookshelfViewModel model)
-        {
-            var res = service.Update(model);
-
-            return View(model);
-        }
         [Authorize(Roles = "Admin, User")]
         public IActionResult Delete(long id)
         {
